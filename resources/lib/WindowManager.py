@@ -242,20 +242,10 @@ class WindowManager(object):
         """
         play youtube vid with info from *listitem
         """
-        url, yt_listitem = player.youtube_info_by_id(youtube_id)
-        if not listitem:
-            listitem = yt_listitem
-        if not url:
-            utils.notify(header=addon.LANG(257),
-                         message="no youtube id found")
-            return None
         if self.active_dialog and self.active_dialog.window_type == "dialog":
             self.active_dialog.close()
         xbmc.executebuiltin("Dialog.Close(movieinformation)")
-        xbmc.Player().play(item=url,
-                           listitem=listitem,
-                           windowed=False,
-                           startpos=-1)
+        xbmc.executebuiltin("RunPlugin(plugin://plugin.video.youtube/play/?video_id=" + youtube_id + "&screensaver=true&incognito=true)")
         if self.active_dialog and self.active_dialog.window_type == "dialog":
             player.wait_for_video_end()
             self.active_dialog.doModal()
