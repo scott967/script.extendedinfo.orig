@@ -3,7 +3,7 @@
 # Copyright (C) 2015 - Philipp Temminghoff <phil65@kodi.tv>
 # This program is Free Software see LICENSE file for details
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from kodi65 import utils
 from kodi65 import ItemList
@@ -33,7 +33,7 @@ def handle_events(results):
 
 
 def get_near_events(artists):  # not possible with api 2.0
-    arts = [urllib.quote(art['artist'].encode("utf-8")) for art in artists[:50]]
+    arts = [urllib.parse.quote(art['artist'].encode("utf-8")) for art in artists[:50]]
     artist_str = 'artists[]=' + '&artists[]='.join(arts)
     url = BASE_URL + 'location=use_geoip&radius=50&per_page=100&%s' % (artist_str)
     results = utils.get_JSON_response(url, folder="BandsInTown")

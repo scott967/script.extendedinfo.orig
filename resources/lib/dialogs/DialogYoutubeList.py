@@ -94,7 +94,7 @@ def get_window(window_type):
             if media_type == "channel":
                 filter_ = [{"id": youtube_id,
                             "type": "channelId",
-                            "label": listitem.getLabel().decode("utf-8")}]
+                            "label": listitem.getLabel()}]
                 wm.open_youtube_list(filters=filter_)
             else:
                 wm.play_youtube_video(youtube_id=youtube_id,
@@ -229,7 +229,7 @@ def open(self, search_str="", filters=None, sort="relevance", filter_label="", m
     open video list, deal with window stack
     """
     YouTube = get_window(windows.DialogXML)
-    dialog = YouTube(u'script-%s-YoutubeList.xml' % addon.NAME, addon.PATH,
+    dialog = YouTube('script-%s-YoutubeList.xml' % addon.NAME, addon.PATH,
                      search_str=search_str,
                      filters=[] if not filters else filters,
                      filter_label=filter_label,

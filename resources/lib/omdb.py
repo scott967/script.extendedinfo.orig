@@ -13,4 +13,4 @@ def get_movie_info(imdb_id):
     results = utils.get_JSON_response(BASE_URL + url, 20, "OMDB")
     if not results:
         return None
-    return {k: v for (k, v) in results.iteritems() if v != "N/A"}
+    return {k: v for (k, v) in results.items() if v != "N/A"}

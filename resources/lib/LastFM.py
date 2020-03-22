@@ -3,7 +3,7 @@
 # Copyright (C) 2015 - Philipp Temminghoff <phil65@kodi.tv>
 # This program is Free Software see LICENSE file for details
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import re
 
 from kodi65 import utils
@@ -92,9 +92,9 @@ def get_data(method, params=None, cache_days=0.5):
     params["method"] = method
     params["api_key"] = LAST_FM_API_KEY
     params["format"] = "json"
-    params = {k: unicode(v).encode('utf-8') for k, v in params.iteritems() if v}
+    params = {k: str(v) for k, v in params.items() if v}
     url = "{base_url}{params}".format(base_url=BASE_URL,
-                                      params=urllib.urlencode(params))
+                                      params=urllib.parse.urlencode(params))
     return utils.get_JSON_response(url=url,
                                    cache_days=cache_days,
                                    folder="LastFM")
@@ -112,7 +112,7 @@ def clean_text(text):
     text = text.replace('&#39;', "'").replace('&quot;', '"')
     text = re.sub("\n\\.$", "", text)
     text = text.replace('User-contributed text is available under the Creative Commons By-SA License and may also be available under the GNU FDL.', '')
-    removals = {u'\u200b', " ", "\n"}
+    removals = {'\u200b', " ", "\n"}
     while text:
         s = text[0]
         e = text[-1]

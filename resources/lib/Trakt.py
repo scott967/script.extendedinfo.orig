@@ -4,8 +4,8 @@
 # This program is Free Software see LICENSE file for details
 
 import datetime
-import urllib
-import TheMovieDB as tmdb
+import urllib.request, urllib.parse, urllib.error
+from resources.lib import TheMovieDB as tmdb
 
 from kodi65 import addon
 from kodi65 import utils
@@ -36,12 +36,12 @@ def get_episodes(content):
     count = 1
     if not results:
         return None
-    for day in results.iteritems():
+    for day in results.items():
         for episode in day[1]:
             ep = episode["episode"]
             tv = episode["show"]
             title = ep["title"] if ep["title"] else ""
-            label = u"{0} - {1}x{2}. {3}".format(tv["title"],
+            label = "{0} - {1}x{2}. {3}".format(tv["title"],
                                                  ep["season"],
                                                  ep["number"],
                                                  title)
@@ -200,7 +200,7 @@ def get_similar(media_type, imdb_id):
 def get_data(url, params=None, cache_days=10):
     params = params if params else {}
     params["limit"] = 10
-    url = "%s%s?%s" % (BASE_URL, url, urllib.urlencode(params))
+    url = "%s%s?%s" % (BASE_URL, url, urllib.parse.urlencode(params))
     return utils.get_JSON_response(url=url,
                                    folder="Trakt",
                                    headers=HEADERS,

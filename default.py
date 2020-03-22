@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 # Copyright (C) 2015 - Philipp Temminghoff <phil65@kodi.tv>
 # This program is Free Software see LICENSE file for details
@@ -55,7 +55,7 @@ class Main:
                 self.infos.append(param[5:])
             else:
                 try:
-                    self.params[param.split("=")[0].lower()] = "=".join(param.split("=")[1:]).strip().decode('utf-8')
+                    self.params[param.split("=")[0].lower()] = "=".join(param.split("=")[1:]).strip()
                 except Exception:
                     pass
 

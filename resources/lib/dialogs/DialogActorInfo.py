@@ -6,7 +6,7 @@
 import xbmcgui
 
 from resources.lib import TheMovieDB as tmdb
-from DialogBaseInfo import DialogBaseInfo
+from .DialogBaseInfo import DialogBaseInfo
 
 from kodi65 import imagetools
 from kodi65 import addon

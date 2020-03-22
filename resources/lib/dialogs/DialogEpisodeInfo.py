@@ -7,7 +7,7 @@ import xbmc
 
 from resources.lib import TheMovieDB as tmdb
 from resources.lib.WindowManager import wm
-from DialogVideoInfo import DialogVideoInfo
+from .DialogVideoInfo import DialogVideoInfo
 
 from kodi65 import imagetools
 from kodi65 import busy

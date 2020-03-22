@@ -4,7 +4,7 @@
 # This program is Free Software see LICENSE file for details
 
 from resources.lib import TheMovieDB as tmdb
-from DialogVideoInfo import DialogVideoInfo
+from .DialogVideoInfo import DialogVideoInfo
 
 from kodi65 import imagetools
 from kodi65 import utils

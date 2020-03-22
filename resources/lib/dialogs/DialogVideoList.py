@@ -382,7 +382,7 @@ def get_window(window_type):
         @ch.click(ID_BUTTON_CERTFILTER)
         def set_certification_filter(self, control_id):
             response = tmdb.get_certification_list(self.type)
-            countries = [key for key in response.keys()]
+            countries = [key for key in list(response.keys())]
             index = xbmcgui.Dialog().select(heading=addon.LANG(21879),
                                             list=countries)
             if index == -1:

@@ -4,7 +4,7 @@
 # This program is Free Software see LICENSE file for details
 
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from kodi65 import kodijson
 from kodi65 import addon
@@ -150,8 +150,8 @@ def set_rating(media_type, media_id, rating, dbid=None):
 
 def send_request(url, params, values, delete=False):
     params["api_key"] = TMDB_KEY
-    params = {k: unicode(v).encode('utf-8') for k, v in params.iteritems() if v}
-    url = "%s%s?%s" % (URL_BASE, url, urllib.urlencode(params))
+    params = {k: str(v) for k, v in params.items() if v}
+    url = "%s%s?%s" % (URL_BASE, url, urllib.parse.urlencode(params))
     utils.log(url)
     if delete:
         return utils.delete(url, values=values, headers=HEADERS)
@@ -353,7 +353,7 @@ def handle_episodes(results):
     for item in results:
         title = item.get("name")
         if not title:
-            title = u"%s %s" % (addon.LANG(20359), item.get('episode_number'))
+            title = "%s %s" % (addon.LANG(20359), item.get('episode_number'))
         listitem = {'label': title}
         listitem = VideoItem(label=title,
                              artwork=get_image_urls(still=item.get("still_path")))
@@ -442,7 +442,7 @@ def handle_seasons(results):
     listitems = ItemList(content_type="seasons")
     for item in results:
         season = item.get('season_number')
-        listitem = VideoItem(label=addon.LANG(20381) if season == 0 else u"%s %s" % (addon.LANG(20373), season),
+        listitem = VideoItem(label=addon.LANG(20381) if season == 0 else "%s %s" % (addon.LANG(20373), season),
                              properties={'id': item.get('id')},
                              artwork=get_image_urls(poster=item.get("poster_path")))
         listitem.set_infos({'mediatype': "season",
@@ -525,7 +525,7 @@ def handle_companies(results):
                                 'headquarters': item.get('headquarters'),
                                 'homepage': item.get('homepage'),
                                 'id': item['id']})
-        art = u"resource://resource.images.studios.white/{}.png".format(item['name']) if item['name'] else ""
+        art = "resource://resource.images.studios.white/{}.png".format(item['name']) if item['name'] else ""
         company.set_artwork({"thumb": art,
                              "icon": art})
         companies.append(company)
@@ -620,8 +620,8 @@ def get_set_id(set_name):
 def get_data(url="", params=None, cache_days=14):
     params = params if params else {}
     params["api_key"] = TMDB_KEY
-    params = {k: unicode(v).encode('utf-8') for k, v in params.iteritems() if v}
-    url = "%s%s?%s" % (URL_BASE, url, urllib.urlencode(params))
+    params = {k: str(v) for k, v in params.items() if v}
+    url = "%s%s?%s" % (URL_BASE, url, urllib.parse.urlencode(params))
     response = utils.get_JSON_response(url, cache_days, "TheMovieDB")
     if not response:
         utils.log("No response from TMDB")

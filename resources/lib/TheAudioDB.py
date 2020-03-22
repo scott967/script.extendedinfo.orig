@@ -3,7 +3,7 @@
 # Copyright (C) 2015 - Philipp Temminghoff <phil65@kodi.tv>
 # This program is Free Software see LICENSE file for details
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 import xbmc
 
@@ -202,7 +202,7 @@ def get_track_details(audiodb_id):
 
 
 def get_data(url, params):
-    params = {k: unicode(v).encode('utf-8') for k, v in params.iteritems() if v}
-    url = "%s%s.php?%s" % (BASE_URL, url, urllib.urlencode(params))
+    params = {k: str(v) for k, v in params.items() if v}
+    url = "%s%s.php?%s" % (BASE_URL, url, urllib.parse.urlencode(params))
     return utils.get_JSON_response(url=url,
                                    folder="TheAudioDB")

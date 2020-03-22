@@ -3,7 +3,7 @@
 # Copyright (C) 2015 - Philipp Temminghoff <phil65@kodi.tv>
 # This program is Free Software see LICENSE file for details
 
-from __future__ import unicode_literals
+
 
 import time
 import os
@@ -13,11 +13,11 @@ import xbmc
 import xbmcgui
 import xbmcplugin
 
-import Trakt
-import LastFM
-import TheAudioDB as AudioDB
-import TheMovieDB as tmdb
-from WindowManager import wm
+from resources.lib import Trakt
+from resources.lib import LastFM
+from resources.lib import TheAudioDB as AudioDB
+from resources.lib import TheMovieDB as tmdb
+from .WindowManager import wm
 
 from kodi65 import youtube
 from kodi65 import local_db
@@ -220,7 +220,7 @@ def start_info_actions(info, params):
             addon.set_global('%sSummary' % params.get("prefix", ""), track_info["summary"])
     elif info == 'topartistsnearevents':
         artists = local_db.get_artists()
-        import BandsInTown
+        from . import BandsInTown
         return BandsInTown.get_near_events(artists[0:49])
     elif info == 'youtubesearchvideos':
         addon.set_global('%sSearchValue' % params.get("prefix", ""), params.get("id", ""))

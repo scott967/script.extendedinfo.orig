@@ -208,7 +208,7 @@ class DialogBaseInfo(windows.DialogXML):
         if index == 1:
             filters = [{"id": listitem.getProperty("id"),
                         "type": "with_people",
-                        "label": listitem.getLabel().decode("utf-8")}]
+                        "label": listitem.getLabel()}]
             wm.open_video_list(filters=filters)
         if index == 2:
             self.open_credit_dialog(credit_id)
