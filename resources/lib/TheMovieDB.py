@@ -3,9 +3,6 @@
 # Copyright (C) 2015 - Philipp Temminghoff <phil65@kodi.tv>
 # This program is Free Software see LICENSE file for details
 
-from __future__ import unicode_literals
-from __future__ import absolute_import
-
 import re
 import urllib
 
@@ -431,8 +428,7 @@ def handle_lists(results):
                              path="plugin://script.extendedinfo?info=listmovies&---id=%s" % item.get('id'),
                              artwork=get_image_urls(poster=item.get("poster_path")))
         listitem.set_infos({'plot': item.get('description'),
-                            "mediatype": "set"})
-        listitem.set_folder(True)
+                            "media_type": "set"})
         listitem.set_properties({'certification': item.get('certification', "") + item.get('rating', ""),
                                  'item_count': item.get('item_count'),
                                  'favorite_count': item.get('favorite_count'),
@@ -870,7 +866,6 @@ def extended_tvshow_info(tvshow_id=None, cache_days=7, dbid=None):
                       'Status': translate_status(info.get('status'))})
     tvshow.set_properties({'credit_id': info.get('credit_id'),
                            'id': tmdb_id,
-                           'tvdb_id': info["external_ids"].get("tvdb_id"),
                            'popularity': round(info['popularity'], 1) if info.get('popularity') else "",
                            'showtype': info.get('type'),
                            'homepage': info.get('homepage'),
@@ -1052,8 +1047,6 @@ def get_rated_media_items(media_type, sort_by=None, page=1, cache_days=0):
         data = get_data(url="guest_session/%s/rated/%s" % (session_id, media_type),
                         params=params,
                         cache_days=0)
-    if not data.get("results"):
-        utils.notify("Nothing rated yet")
     if media_type == "tv/episodes":
         itemlist = handle_episodes(data["results"])
     elif media_type == "tv":

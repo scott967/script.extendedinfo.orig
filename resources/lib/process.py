@@ -4,7 +4,6 @@
 # This program is Free Software see LICENSE file for details
 
 from __future__ import unicode_literals
-from __future__ import absolute_import
 
 import time
 import os
@@ -14,11 +13,11 @@ import xbmc
 import xbmcgui
 import xbmcplugin
 
-from resources.lib import Trakt
-from resources.lib import LastFM
-from resources.lib import TheAudioDB as AudioDB
-from resources.lib import TheMovieDB as tmdb
-from resources.lib.WindowManager import wm
+import Trakt
+import LastFM
+import TheAudioDB as AudioDB
+import TheMovieDB as tmdb
+from WindowManager import wm
 
 from kodi65 import youtube
 from kodi65 import local_db
@@ -65,7 +64,10 @@ def start_info_actions(info, params):
     elif info == 'starredmovies':
         return tmdb.get_fav_items("movies")
     elif info == 'accountlists':
-        return tmdb.handle_lists(tmdb.get_account_lists())
+        account_lists = tmdb.handle_lists(tmdb.get_account_lists())
+        for item in account_lists:
+            item.set_property("directory", True)
+        return account_lists
     elif info == 'listmovies':
         return tmdb.get_movies_from_list(params["id"])
     elif info == 'airingtodaytvshows':

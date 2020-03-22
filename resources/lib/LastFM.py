@@ -10,12 +10,15 @@ from kodi65 import utils
 from kodi65 import ItemList
 
 LAST_FM_API_KEY = 'd942dd5ca4c9ee5bd821df58cf8130d4'
+GOOGLE_MAPS_KEY = 'AIzaSyBESfDvQgWtWLkNiOYXdrA9aU-2hv_eprY'
 BASE_URL = 'http://ws.audioscrobbler.com/2.0/?'
 
 
 def handle_albums(results):
     albums = ItemList(content_type="albums")
-    if results and 'topalbums' in results and "album" in results['topalbums']:
+    if not results:
+        return albums
+    if 'topalbums' in results and "album" in results['topalbums']:
         for album in results['topalbums']['album']:
             albums.append({'artist': album['artist']['name'],
                            'mbid': album.get('mbid', ""),
@@ -79,8 +82,8 @@ def get_track_info(artist_name="", track=""):
     if not results:
         return {}
     summary = results['track']['wiki']['summary'] if "wiki" in results['track'] else ""
-    return {'playcount': results['track']['playcount'],
-            'thumb': results['album']['image'][-1]['#text'],
+    return {'playcount': str(results['track']['playcount']),
+            'thumb': str(results['track']['playcount']),
             'summary': clean_text(summary)}
 
 

@@ -3,13 +3,9 @@
 # Copyright (C) 2015 - Philipp Temminghoff <phil65@kodi.tv>
 # This program is Free Software see LICENSE file for details
 
-from __future__ import unicode_literals
-from __future__ import absolute_import
-
 import datetime
 import urllib
-
-from resources.lib import TheMovieDB as tmdb
+import TheMovieDB as tmdb
 
 from kodi65 import addon
 from kodi65 import utils
@@ -22,7 +18,7 @@ BASE_URL = "https://api-v2launch.trakt.tv/"
 HEADERS = {
     'Content-Type': 'application/json',
     'trakt-api-key': TRAKT_KEY,
-    'trakt-api-version': '2'
+    'trakt-api-version': 2
 }
 PLUGIN_BASE = "plugin://script.extendedinfo/?info="
 
