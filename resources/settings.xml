@@ -1,23 +1,178 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<settings>
-    <category label="128">
+<?xml version="1.0" ?>
+<settings version="1">
+	<section id="script.extendedinfo">
+		<category help="" id="general" label="128">
 <!--         <setting type="sep"/> -->
-        <setting label="32163" type="bool" id="infodialog_onclick" default="true"/>
-        <setting label="32084" type="bool" id="classic_search" default="false"/>
-        <setting label="32164" type="action" action="RunScript(script.extendedinfo,info=deletecache)"/>
-    </category>
-    <category label="TheMovieDB">
-        <setting label="32080" type="bool" id="force_native_layout"/>
-        <setting label="32159" type="select" values="bg|cs|da|de|el|en|es|fi|fr|he|hr|hu|it|ja|ko|nl|no|pl|pt|ru|sl|sv|tr|zh" id="LanguageID" default="en"/>
-        <setting label="32160" type="text" id="tmdb_username" />
-        <setting label="32161" type="text" id="tmdb_password" option="hidden"/>
-        <setting label="32162" type="bool" id="include_adults"/>
-        <!-- <setting label="Sync MovieDB watchlist" type="action" action="RunScript(script.extendedinfo,info=syncwatchlist)"/>
+			<group id="1">
+				<setting help="" id="infodialog_onclick" label="32163" type="boolean">
+					<level>0</level>
+					<default>true</default>
+					<control type="toggle"/>
+				</setting>
+				<setting help="" id="classic_search" label="32084" type="boolean">
+					<level>0</level>
+					<default>false</default>
+					<control type="toggle"/>
+				</setting>
+				<setting help="" id="delete cache" label="32164" type="action">
+					<level>0</level>
+					<data>RunScript(script.extendedinfo,info=deletecache)</data>
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control format="action" type="button"/>
+				</setting>
+			</group>
+		</category>
+		<category help="" id="TheMovieDB" label="32171">
+			<group id="1">
+				<setting help="" id="force_native_layout" label="32080" type="boolean">
+					<level>0</level>
+					<default>false</default>
+					<control type="toggle"/>
+				</setting>
+				<setting help="" id="LanguageID" label="32159" type="integer">
+					<level>0</level>
+					<default>5</default>
+					<constraints>
+						<options>
+							<option label="bg">0</option>
+							<option label="cs">1</option>
+							<option label="da">2</option>
+							<option label="de">3</option>
+							<option label="el">4</option>
+							<option label="en">5</option>
+							<option label="es">6</option>
+							<option label="fi">7</option>
+							<option label="fr">8</option>
+							<option label="he">9</option>
+							<option label="hr">10</option>
+							<option label="hu">11</option>
+							<option label="it">12</option>
+							<option label="ja">13</option>
+							<option label="ko">14</option>
+							<option label="nl">15</option>
+							<option label="no">16</option>
+							<option label="pl">17</option>
+							<option label="pt">18</option>
+							<option label="ru">19</option>
+							<option label="sl">20</option>
+							<option label="sv">21</option>
+							<option label="tr">22</option>
+							<option label="zh">23</option>
+						</options>
+					</constraints>
+					<control format="string" type="list">
+						<heading>32159</heading>
+					</control>
+				</setting>
+				<setting help="" id="tmdb_username" label="32160" type="string">
+					<level>0</level>
+					<default/>
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control format="string" type="edit">
+						<heading>32160</heading>
+					</control>
+				</setting>
+				<setting help="" id="tmdb_password" label="32161" type="string">
+					<level>0</level>
+					<default/>
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control format="string" type="edit">
+						<heading>32161</heading>
+						<hidden>true</hidden>
+					</control>
+				</setting>
+				<setting help="" id="include_adults" label="32162" type="boolean">
+					<level>0</level>
+					<default>false</default>
+					<control type="toggle"/>
+				</setting>
+				<!-- <setting label="Sync MovieDB watchlist" type="action" action="RunScript(script.extendedinfo,info=syncwatchlist)"/>
         <setting type="sep"/>-->
-    </category>
-    <category label="32008">
-        <setting label="32004" type="select" values="google|youtube|local" id="autocomplete_provider" default="youtube"/>
-        <setting label="32003" visible="!eq(-1,local)" type="select" values="bg|cs|da|de|el|en|es|fi|fr|he|hr|hu|it|ja|ko|nl|no|pl|pt|ru|sl|sv|tr|zh" id="autocomplete_lang" default="en"/>
-        <setting label="32003" visible="eq(-2,local)" type="select" values="en|de|fr|nl" id="autocomplete_lang_local" default="en"/>
-    </category>
+			</group>
+		</category>
+		<category help="" id="autocompletion" label="32008">
+			<group id="1">
+				<setting help="" id="autocomplete_provider" label="32004" type="integer">
+					<level>0</level>
+					<default>1</default>
+					<constraints>
+						<options>
+							<option label="google">0</option>
+							<option label="youtube">1</option>
+							<option label="local">2</option>
+						</options>
+					</constraints>
+					<control format="string" type="list">
+						<heading>32004</heading>
+					</control>
+				</setting>
+				<setting help="" id="autocomplete_lang" label="32003" type="integer">
+					<level>0</level>
+					<default>5</default>
+					<constraints>
+						<options>
+							<option label="bg">0</option>
+							<option label="cs">1</option>
+							<option label="da">2</option>
+							<option label="de">3</option>
+							<option label="el">4</option>
+							<option label="en">5</option>
+							<option label="es">6</option>
+							<option label="fi">7</option>
+							<option label="fr">8</option>
+							<option label="he">9</option>
+							<option label="hr">10</option>
+							<option label="hu">11</option>
+							<option label="it">12</option>
+							<option label="ja">13</option>
+							<option label="ko">14</option>
+							<option label="nl">15</option>
+							<option label="no">16</option>
+							<option label="pl">17</option>
+							<option label="pt">18</option>
+							<option label="ru">19</option>
+							<option label="sl">20</option>
+							<option label="sv">21</option>
+							<option label="tr">22</option>
+							<option label="zh">23</option>
+						</options>
+					</constraints>
+					<dependencies>
+						<dependency type="visible">
+							<condition operator="!is" setting="autocomplete_provider">2</condition>
+						</dependency>
+					</dependencies>
+					<control format="string" type="list">
+						<heading>32003</heading>
+					</control>
+				</setting>
+				<setting help="" id="autocomplete_lang_local" label="32003" type="integer">
+					<level>0</level>
+					<default>0</default>
+					<constraints>
+						<options>
+							<option label="en">0</option>
+							<option label="de">1</option>
+							<option label="fr">2</option>
+							<option label="nl">3</option>
+						</options>
+					</constraints>
+					<dependencies>
+						<dependency type="visible">
+							<condition setting="autocomplete_provider">2</condition>
+						</dependency>
+					</dependencies>
+					<control format="string" type="list">
+						<heading>32003</heading>
+					</control>
+				</setting>
+			</group>
+		</category>
+	</section>
 </settings>

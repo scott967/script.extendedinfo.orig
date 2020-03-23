@@ -759,3 +759,7 @@ msgstr "Hodnotit seriál"
 msgctxt "#32170"
 msgid "Add to Trakt Watchlist"
 msgstr "Přidat do seznamu sledování Trakt"
+
+msgctxt "#32171"
+msgid "TheMovieDB"
+msgstr ""

@@ -759,3 +759,7 @@ msgstr "Oceń serial"
 msgctxt "#32170"
 msgid "Add to Trakt Watchlist"
 msgstr "Dodaj do listy Trakt"
+
+msgctxt "#32171"
+msgid "TheMovieDB"
+msgstr ""

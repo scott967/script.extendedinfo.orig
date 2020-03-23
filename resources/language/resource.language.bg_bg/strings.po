@@ -704,3 +704,11 @@ msgstr "Издания"
 msgctxt "#32169"
 msgid "Rate TV show"
 msgstr "Оценете ТВ Сериал"
+
+msgctxt "#32170"
+msgid "Add to Trakt Watchlist"
+msgstr ""
+
+msgctxt "#32171"
+msgid "TheMovieDB"
+msgstr ""

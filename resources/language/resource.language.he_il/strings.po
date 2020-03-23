@@ -759,3 +759,7 @@ msgstr "דרג סדרה"
 msgctxt "#32170"
 msgid "Add to Trakt Watchlist"
 msgstr "הוסף לרשימת הצפייה ב-Trakt"
+
+msgctxt "#32171"
+msgid "TheMovieDB"
+msgstr ""

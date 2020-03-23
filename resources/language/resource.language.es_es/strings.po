@@ -756,3 +756,7 @@ msgstr "Valorar programa TV"
 msgctxt "#32170"
 msgid "Add to Trakt Watchlist"
 msgstr "Añadir a lista de seguimiento en Trakt.tv"
+
+msgctxt "#32171"
+msgid "TheMovieDB"
+msgstr ""
