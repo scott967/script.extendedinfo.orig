@@ -22,6 +22,16 @@
 					</constraints>
 					<control format="action" type="button"/>
 				</setting>
+				<setting help="" id="Youtube API Key" label="32172" type="string">
+					<level>0</level>
+					<default/>
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control format="string" type="edit">
+						<heading>32172</heading>
+					</control>
+				</setting>
 			</group>
 		</category>
 		<category help="" id="TheMovieDB" label="32171">

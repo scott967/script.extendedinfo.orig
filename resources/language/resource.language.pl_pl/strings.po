@@ -763,3 +763,8 @@ msgstr "Dodaj do listy Trakt"
 msgctxt "#32171"
 msgid "TheMovieDB"
 msgstr ""
+
+msgctxt "#32172"
+msgid "Youtube API Key"
+msgstr ""
+

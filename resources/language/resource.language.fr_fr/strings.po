@@ -760,3 +760,7 @@ msgstr "Ajouter à Trakt Watchlist"
 msgctxt "#32171"
 msgid "TheMovieDB"
 msgstr ""
+
+msgctxt "#32172"
+msgid "Youtube API Key"
+msgstr ""
