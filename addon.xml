@@ -22,7 +22,7 @@
 		<forum>http://forum.kodi.tv/showthread.php?tid=160558</forum>
 		<source>https://github.com/phil65/script.extendedinfo</source>
 		<email>phil65@kodi.tv</email>
-		<news>Fix support for Kodi L* nightlies[CR]Browser window improvements[CR]Fixes for TADB/LastFM</news>
+		<news>Python 3 fixes by scott967</news>
 		<assets>
 			<icon>resources/icon.png</icon>
 			<fanart>resources/fanart.jpg</fanart>
