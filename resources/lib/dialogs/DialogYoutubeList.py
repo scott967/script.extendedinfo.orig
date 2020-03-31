@@ -214,12 +214,14 @@ def get_window(window_type):
             self.set_filter_label()
             if self.search_str:
                 self.filter_label = addon.LANG(32146) % (self.search_str) + "  " + self.filter_label
+            user_key = addon.setting("Youtube API Key")
             return youtube.search(search_str=self.search_str,
                                   orderby=self.sort,
                                   extended=True,
                                   filters={item["type"]: item["id"] for item in self.filters},
                                   media_type=self.type,
-                                  page=self.page_token)
+                                  page=self.page_token,
+                                  api_key=user_key)
 
     return DialogYoutubeList
 
