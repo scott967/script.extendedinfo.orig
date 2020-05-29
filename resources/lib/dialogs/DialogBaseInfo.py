@@ -256,7 +256,8 @@ class DialogBaseInfo(windows.DialogXML):
         except Exception:
             return None
         if not self.yt_listitems:
-            self.yt_listitems = youtube.search(search_str, limit=15)
+            user_key = addon.setting("Youtube API Key")
+            self.yt_listitems = youtube.search(search_str, limit=15, api_key=user_key)
         if not self.yt_listitems:
             return None
         vid_ids = [item.get_property("key") for item in self.lists["videos"]] if "videos" in self.lists else []

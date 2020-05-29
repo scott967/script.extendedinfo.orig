@@ -224,10 +224,12 @@ def start_info_actions(info, params):
         return BandsInTown.get_near_events(artists[0:49])
     elif info == 'youtubesearchvideos':
         addon.set_global('%sSearchValue' % params.get("prefix", ""), params.get("id", ""))
+        user_key = addon.setting("Youtube API Key")
         if params.get("id"):
             return youtube.search(search_str=params.get("id", ""),
                                   hd=params.get("hd"),
-                                  orderby=params.get("orderby", "relevance"))
+                                  orderby=params.get("orderby", "relevance"),
+                                  api_key=user_key)
     elif info == 'youtubeplaylistvideos':
         return youtube.get_playlist_videos(params.get("id", ""))
     elif info == 'youtubeusersearchvideos':
