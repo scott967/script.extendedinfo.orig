@@ -223,8 +223,7 @@ class WindowManager(object):
         if not addon.setting("first_start_infodialog"):
             addon.set_setting("first_start_infodialog", "True")
             xbmcgui.Dialog().ok(heading=addon.NAME,
-                                line1=addon.LANG(32140),
-                                line2=addon.LANG(32141))
+                                message=addon.LANG(32140) + '[CR]' + addon.LANG(32141))
         self.active_dialog = dialog
         dialog.doModal()
 #        if dialog.canceled:
