@@ -56,7 +56,9 @@ class DialogTVShowInfo(DialogVideoInfo):
         super(DialogTVShowInfo, self).__init__(*args, **kwargs)
         data = tmdb.extended_tvshow_info(tvshow_id=kwargs.get('tmdb_id'),
                                          dbid=kwargs.get('dbid'))
+        utils.log('DialogTVShowinfo ln 59 data from tmdb: ' +  repr(data))
         if not data:
+            utils.log('class DialogTVShowInfo __init__ No data return none')
             return None
         self.info, self.lists, self.states = data
         if not self.info.get_info("dbid"):

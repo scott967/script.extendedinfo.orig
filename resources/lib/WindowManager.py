@@ -68,7 +68,7 @@ class WindowManager(object):
         busy.hide_busy()
         self.open_infodialog(dialog)
 
-    def open_tvshow_info(self, tmdb_id=None, dbid=None, tvdb_id=None, imdb_id=None, name=None):
+    def open_tvshow_info(self, tmdb_id=None, dbid=None, tvdb_id=None, imdb_id=None, name=None, year=None):
         """
         open tvshow info, deal with window stack
         """
@@ -83,14 +83,20 @@ class WindowManager(object):
             tmdb_id = tmdb.get_show_tmdb_id(tvdb_id=imdb_id,
                                             source="imdb_id")
         elif dbid:
+            utils.log('trying with tvshow dbid')
             tvdb_id = local_db.get_imdb_id(media_type="tvshow",
                                            dbid=dbid)
             if tvdb_id:
+                utils.log('got tvshow tvdb_id')
                 tmdb_id = tmdb.get_show_tmdb_id(tvdb_id)
+            else:
+                utils.log('did not get tvdb_id')
         elif name:
+            utils.log('open_tvshow_info: tmdb.search_media with media_name= ' + name +' media_type:  tv' + ' year: ' + year)
             tmdb_id = tmdb.search_media(media_name=name,
-                                        year="",
+                                        media_year=year,
                                         media_type="tv")
+        utils.log('WindowManager ln 98 Open tvshow info dialog with tmdb_id ' + str(tmdb_id) + ' and dbid ' + str(dbid))
         dialog = DialogTVShowInfo(INFO_XML,
                                   addon.PATH,
                                   tmdb_id=tmdb_id,
@@ -209,7 +215,9 @@ class WindowManager(object):
         self.open_dialog(dialog)
 
     def open_infodialog(self, dialog):
-        if dialog.info:
+        utils.log('WindowManager ln 217 open_infodialog dialog.info type ' + str(type(dialog.info)) + ' contents ' + repr(dialog.info))
+        utils.log(' info label is '+ str(dialog.info.label))
+        if dialog.info and dialog.info.label :
             self.open_dialog(dialog)
         else:
             self.active_dialog = None

@@ -357,7 +357,8 @@ def start_info_actions(info, params):
                             tvdb_id=params.get("tvdb_id"),
                             dbid=params.get("dbid"),
                             imdb_id=params.get("imdb_id"),
-                            name=params.get("name"))
+                            name=params.get("name"),
+                            year=params.get("year"))
         addon.clear_global('infodialogs.active')
     elif info == 'seasoninfo':
         if addon.get_global('infodialogs.active'):
