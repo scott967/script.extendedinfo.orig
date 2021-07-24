@@ -351,6 +351,23 @@ RunScript(script.extendedinfo,info=extendedinfo,dbid=MOVIE_DBID)
 RunScript(script.extendedinfo,info=extendedinfo,imdb_id=IMDB_ID)
 ```
 
+### TV Show / Season / Episode Info
+
+RunScript(script.extendedinfo,info=extendedtvinfo,name=TVSHOWNAME[,year=TVSHOWFIRSTAIREDYEAR])
+'''
+'''
+RunScript(script.extendedinfo,info=extendedtvinfo,DBID=TVSHOW_DBID)
+'''
+'''
+RunScript(script.extendedinfo,info=extendedtvinfo,tvdb_id=TVSHOW_TVDB_ID)
+'''
+'''
+RunScript(script.extendedinfo,info=seasoninfo,tvshow=TVSHOWNAME,season=SEASON_NO[,dbid=TVSHOW_DBID])
+'''
+'''
+RunScript(script.extendedinfo,info=extendedepisodeinfo,tvshow=TVSHOWNAME,season=SEASON_NO,episode=EPISODE_NO[,dbid=TVSHOW_DBID])
+'''
+
 ----
 
 ## SKINNING ADD-ON DIALOGS:
