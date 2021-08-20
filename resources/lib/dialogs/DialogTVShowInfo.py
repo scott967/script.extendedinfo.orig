@@ -9,10 +9,10 @@ import xbmcgui
 from resources.lib import TheMovieDB as tmdb
 from resources.lib.WindowManager import wm
 
-from kodi65 import imagetools
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import ActionHandler
+from kutils import imagetools
+from kutils import addon
+from kutils import utils
+from kutils import ActionHandler
 
 from .DialogVideoInfo import DialogVideoInfo
 
@@ -52,12 +52,13 @@ class DialogTVShowInfo(DialogVideoInfo):
              (ID_LIST_IMAGES, "images"),
              (ID_LIST_BACKDROPS, "backdrops")]
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super(DialogTVShowInfo, self).__init__(*args, **kwargs)
         data = tmdb.extended_tvshow_info(tvshow_id=kwargs.get('tmdb_id'),
                                          dbid=kwargs.get('dbid'))
         if not data:
-            return None
+            return
+
         self.info, self.lists, self.states = data
         if not self.info.get_info("dbid"):
             self.info.set_art("poster", utils.get_file(self.info.get_art("poster")))
@@ -73,7 +74,10 @@ class DialogTVShowInfo(DialogVideoInfo):
         ch.serve(control_id, self)
 
     def set_buttons(self):
-        self.set_visible(ID_BUTTON_BROWSE, self.get_info("dbid"))
+        # TODO:  I think this should be self.info.get_info("dbid")
+        #        Not self.get_info()
+
+        self.set_visible(ID_BUTTON_BROWSE, self.info.get_info("dbid"))
         self.set_visible(ID_BUTTON_OPENLIST, self.logged_in)
         self.set_visible(ID_BUTTON_RATED, True)
 
