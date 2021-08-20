@@ -9,15 +9,15 @@ import xbmcgui
 from resources.lib import TheMovieDB as tmdb
 from resources.lib.WindowManager import wm
 
-from kodi65 import youtube
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import kodijson
-from kodi65 import selectdialog
-from kodi65 import slideshow
-from kodi65 import VideoItem
-from kodi65 import ActionHandler
-from kodi65 import windows
+from kutils import youtube
+from kutils import addon
+from kutils import utils
+from kutils import kodijson
+from kutils import selectdialog
+from kutils import slideshow
+from kutils import VideoItem
+from kutils import ActionHandler
+from kutils import windows
 
 ch = ActionHandler()
 
@@ -28,6 +28,10 @@ ID_BUTTON_BOUNCEDOWN = 20001
 
 
 class DialogBaseInfo(windows.DialogXML):
+    # Define in base class to eliminate "undefined" checks
+
+    TYPE_ALT: str = None
+
     ACTION_PREVIOUS_MENU = [92, 9]
     ACTION_EXIT_SCRIPT = [13, 10]
 

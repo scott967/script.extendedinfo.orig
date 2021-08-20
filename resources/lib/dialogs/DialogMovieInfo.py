@@ -13,12 +13,12 @@ from resources.lib import omdb
 from resources.lib.WindowManager import wm
 from .DialogVideoInfo import DialogVideoInfo
 
-from kodi65 import imagetools
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import kodijson
-from kodi65 import busy
-from kodi65 import ActionHandler
+from kutils import imagetools
+from kutils import addon
+from kutils import utils
+from kutils import kodijson
+from kutils import busy
+from kutils import ActionHandler
 
 ID_LIST_SIMILAR = 150
 ID_LIST_SETS = 250
@@ -71,7 +71,7 @@ class DialogMovieInfo(DialogVideoInfo):
         data = tmdb.extended_movie_info(movie_id=kwargs.get('id'),
                                         dbid=kwargs.get('dbid'))
         if not data:
-            return None
+            return
         self.info, self.lists, self.states = data
         sets_thread = SetItemsThread(self.info.get_property("set_id"))
         self.omdb_thread = utils.FunctionThread(function=omdb.get_movie_info,
@@ -255,6 +255,8 @@ class SetItemsThread(threading.Thread):
     def __init__(self, set_id=""):
         threading.Thread.__init__(self)
         self.set_id = set_id
+        self.listitems = []
+        self.setinfo = {}
 
     def run(self):
         if self.set_id:
