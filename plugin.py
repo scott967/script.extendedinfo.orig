@@ -11,8 +11,8 @@ import xbmcgui
 
 from resources.lib import process
 
-from kodi65 import addon
-from kodi65 import utils
+from kutils import addon
+from kutils import utils
 import routing
 
 MOVIEDB_IMAGE = os.path.join(addon.MEDIA_PATH, "moviedb.png")
@@ -76,8 +76,8 @@ def tmdb():
     if addon.setting("tmdb_username") and addon.setting("tmdb_password"):
         items += login
     for key, value in items:
-        li = xbmcgui.ListItem(label=value,
-                              thumbnailImage="DefaultFolder.png")
+        li = xbmcgui.ListItem(label=value)
+        li.setArt({"thumb": "DefaultFolder.png"})
         url = 'plugin://script.extendedinfo?info=%s' % key
         xbmcplugin.addDirectoryItem(handle=plugin.handle,
                                     url=url,
@@ -106,8 +106,8 @@ def trakt():
              ("airingepisodes", addon.LANG(32028)),
              ("premiereepisodes", addon.LANG(32029))]
     for key, value in items:
-        li = xbmcgui.ListItem(label=value,
-                              thumbnailImage="DefaultFolder.png")
+        li = xbmcgui.ListItem(label=value)
+        li.setArt({'thumb': "DefaultFolder"})
         url = 'plugin://script.extendedinfo?info=%s' % key
         xbmcplugin.addDirectoryItem(handle=plugin.handle,
                                     url=url,
@@ -119,17 +119,22 @@ def trakt():
 
 @plugin.route('/')
 def root():
+    trakt_li: xbmcgui.ListItem = xbmcgui.ListItem(label="Trakt")
+    trakt_li.setArt({'thumb': TRAKT_IMAGE})
+
+    tmdb_li: xbmcgui.ListItem = xbmcgui.ListItem(label="TheMovieDB")
+    tmdb_li.setArt({'thumb': MOVIEDB_IMAGE})
+
+
     items = [
-        (plugin.url_for(trakt), xbmcgui.ListItem(label="Trakt",
-                                                 thumbnailImage=TRAKT_IMAGE), True),
-        (plugin.url_for(tmdb), xbmcgui.ListItem(label="TheMovieDB",
-                                                thumbnailImage=MOVIEDB_IMAGE), True),
+        (plugin.url_for(trakt), trakt_li, True),
+        (plugin.url_for(tmdb), tmdb_li, True),
     ]
     xbmcplugin.addSortMethod(plugin.handle, xbmcplugin.SORT_METHOD_LABEL)
     xbmcplugin.addDirectoryItems(plugin.handle, items)
     xbmcplugin.endOfDirectory(plugin.handle)
 
 
-if (__name__ == "__main__"):
+if __name__ == "__main__":
     Main()
 utils.log('finished')
