@@ -9,12 +9,12 @@ import xbmcgui
 
 from resources.lib.WindowManager import wm
 
-from kodi65 import youtube
-from kodi65 import addon
-from kodi65 import windows
-from kodi65 import busy
-from kodi65 import DialogBaseList
-from kodi65 import ActionHandler
+from kutils import youtube
+from kutils import addon
+from kutils import windows
+from kutils import busy
+from kutils import DialogBaseList
+from kutils import ActionHandler
 
 ch = ActionHandler()
 

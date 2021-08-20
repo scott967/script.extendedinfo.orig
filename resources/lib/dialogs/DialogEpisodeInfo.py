@@ -9,10 +9,10 @@ from resources.lib import TheMovieDB as tmdb
 from resources.lib.WindowManager import wm
 from .DialogVideoInfo import DialogVideoInfo
 
-from kodi65 import imagetools
-from kodi65 import busy
-from kodi65 import addon
-from kodi65 import ActionHandler
+from kutils import imagetools
+from kutils import busy
+from kutils import addon
+from kutils import ActionHandler
 
 ID_BUTTON_RATED = 6006
 
@@ -36,7 +36,7 @@ class DialogEpisodeInfo(DialogVideoInfo):
                                           season=kwargs.get('season'),
                                           episode=kwargs.get('episode'))
         if not data:
-            return None
+            return
         self.info, self.lists, self.states = data
         self.info.set_info("tvshowtitle", tv_info["name"])
         image_info = imagetools.blur(self.info.get_art("thumb"))

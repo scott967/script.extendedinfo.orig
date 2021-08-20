@@ -7,11 +7,11 @@ import urllib.request, urllib.parse, urllib.error
 
 import xbmc
 
-from kodi65 import utils
-from kodi65 import addon
-from kodi65 import local_db
-from kodi65 import AudioItem, VideoItem
-from kodi65 import ItemList
+from kutils import utils
+from kutils import addon
+from kutils import local_db
+from kutils import AudioItem, VideoItem
+from kutils import ItemList
 
 
 AUDIO_DB_KEY = '58353d43204d68753987fl'

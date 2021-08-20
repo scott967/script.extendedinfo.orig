@@ -6,10 +6,10 @@
 from resources.lib import TheMovieDB as tmdb
 from .DialogVideoInfo import DialogVideoInfo
 
-from kodi65 import imagetools
-from kodi65 import utils
-from kodi65 import addon
-from kodi65 import ActionHandler
+from kutils import imagetools
+from kutils import utils
+from kutils import addon
+from kutils import ActionHandler
 
 ch = ActionHandler()
 
@@ -29,7 +29,7 @@ class DialogSeasonInfo(DialogVideoInfo):
         data = tmdb.extended_season_info(tvshow_id=self.tvshow_id,
                                          season_number=kwargs.get('season'))
         if not data:
-            return None
+            return
         self.info, self.lists = data
         if not self.info.get_info("dbid"):  # need to add comparing for seasons
             poster = utils.get_file(url=self.info.get_art("poster"))

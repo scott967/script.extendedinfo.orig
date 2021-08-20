@@ -8,9 +8,9 @@ import xbmcgui
 from resources.lib import TheMovieDB as tmdb
 from .DialogBaseInfo import DialogBaseInfo
 
-from kodi65 import imagetools
-from kodi65 import addon
-from kodi65 import ActionHandler
+from kutils import imagetools
+from kutils import addon
+from kutils import ActionHandler
 
 ID_CONTROL_PLOT = 132
 
@@ -30,7 +30,7 @@ class DialogActorInfo(DialogBaseInfo):
         super(DialogActorInfo, self).__init__(*args, **kwargs)
         data = tmdb.extended_actor_info(actor_id=kwargs.get('id'))
         if not data:
-            return None
+            return
         self.info, self.lists = data
         self.info.update_properties(imagetools.blur(self.info.get_art("thumb")))
 

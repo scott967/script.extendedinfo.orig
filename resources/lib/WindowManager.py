@@ -12,12 +12,12 @@ import xbmcvfs
 
 from . import TheMovieDB as tmdb
 
-from kodi65 import windows
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import busy
-from kodi65 import player
-from kodi65 import local_db
+from kutils import windows
+from kutils import addon
+from kutils import utils
+from kutils import busy
+from kutils import player
+from kutils import local_db
 
 INFO_XML_CLASSIC = 'script-%s-DialogVideoInfo.xml' % (addon.ID)
 LIST_XML_CLASSIC = 'script-%s-VideoList.xml' % (addon.ID)
@@ -248,5 +248,6 @@ class WindowManager(object):
         if self.active_dialog and self.active_dialog.window_type == "dialog":
             player.wait_for_video_end()
             self.active_dialog.doModal()
+
 
 wm = WindowManager()

@@ -9,13 +9,13 @@ import xbmcgui
 from resources.lib import TheMovieDB as tmdb
 from resources.lib.WindowManager import wm
 
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import busy
-from kodi65 import confirmdialog
-from kodi65 import selectdialog
-from kodi65 import ActionHandler
-from kodi65 import DialogBaseList
+from kutils import addon
+from kutils import utils
+from kutils import busy
+from kutils import confirmdialog
+from kutils import selectdialog
+from kutils import ActionHandler
+from kutils import DialogBaseList
 
 ID_BUTTON_SORT = 5001
 ID_BUTTON_GENREFILTER = 5002
@@ -228,6 +228,10 @@ def get_window(window_type):
                 self.reset("favorites")
             else:
                 self.close()
+
+                #  TODO:  should guarantee account_lists is defined or have
+                #         a check for it
+
                 dialog = wm.open_video_list(filters=[],
                                             mode="list",
                                             list_id=account_lists[index - 2]["id"],
@@ -354,6 +358,9 @@ def get_window(window_type):
                 item = items[0]
             else:
                 utils.notify("No company found")
+
+            #  TODO: item not guaranteed to be defined
+
             self.add_filter(key="with_companies",
                             value=item.get_property("id"),
                             label=item.get_label())
