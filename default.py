@@ -7,23 +7,24 @@ import sys
 
 from resources.lib import process
 
-from kodi65 import addon
-from kodi65 import utils
+from kutils import addon
+from kutils import utils
 
 
-def pass_list_to_skin(name, data, prefix="", limit=False):
-    if data and limit and int(limit) < len(data):
-        data = data[:int(limit)]
+def pass_list_to_skin(name, data, prefix="", limit: int = 0):
+    limit_int: int = int(limit)
+    if data and 0 < limit_int < len(data):
+        data = data[:limit_int]
     if not data:
         addon.set_global('%s%s.Count' % (prefix, name), '0')
         return None
     for (count, result) in enumerate(data):
-        for (key, value) in result.iteritems():
-            addon.set_global('%s%s.%i.%s' % (prefix, name, count + 1, key), unicode(value))
-        for key, value in result.get("properties", {}).iteritems():
+        for (key, value) in result.items():
+            addon.set_global('%s%s.%i.%s' % (prefix, name, count + 1, key), str(value))
+        for key, value in result.get("properties", {}).items():
             if not value:
                 continue
-            addon.set_global('%s%s.%i.%s' % (prefix, name, count + 1, key), unicode(value))
+            addon.set_global('%s%s.%i.%s' % (prefix, name, count + 1, key), str(value))
     addon.set_global('%s%s.Count' % (prefix, name), str(len(data)))
 
 
