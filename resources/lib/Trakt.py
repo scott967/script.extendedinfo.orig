@@ -7,11 +7,11 @@ import datetime
 import urllib.request, urllib.parse, urllib.error
 from resources.lib import TheMovieDB as tmdb
 
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import local_db
-from kodi65 import VideoItem
-from kodi65 import ItemList
+from kutils import addon
+from kutils import utils
+from kutils import local_db
+from kutils import VideoItem
+from kutils import ItemList
 
 TRAKT_KEY = 'e9a7fba3fa1b527c08c073770869c258804124c5d7c984ce77206e695fbaddd5'
 BASE_URL = "https://api-v2launch.trakt.tv/"
@@ -197,7 +197,7 @@ def get_similar(media_type, imdb_id):
         return handle_movies(results)
 
 
-def get_data(url, params=None, cache_days=10):
+def get_data(url, params=None, cache_days: float = 10.0):
     params = params if params else {}
     params["limit"] = 10
     url = "%s%s?%s" % (BASE_URL, url, urllib.parse.urlencode(params))
