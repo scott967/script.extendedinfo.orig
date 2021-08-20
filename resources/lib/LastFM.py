@@ -6,8 +6,8 @@
 import urllib.request, urllib.parse, urllib.error
 import re
 
-from kodi65 import utils
-from kodi65 import ItemList
+from kutils import utils
+from kutils import ItemList
 
 LAST_FM_API_KEY = 'd942dd5ca4c9ee5bd821df58cf8130d4'
 GOOGLE_MAPS_KEY = 'AIzaSyBESfDvQgWtWLkNiOYXdrA9aU-2hv_eprY'
@@ -103,14 +103,17 @@ def get_data(method, params=None, cache_days=0.5):
 def clean_text(text):
     if not text:
         return ""
-    text = re.sub('(From Wikipedia, the free encyclopedia)|(Description above from the Wikipedia.*?Wikipedia)', '', text)
-    text = re.sub('<(.|\n|\r)*?>', '', text)
+    text = re.sub(r'(From Wikipedia, the free encyclopedia)|(Description above from the Wikipedia.*?Wikipedia)', '', text)
+    text = re.sub(r'<(.|\n|\r)*?>', '', text)
     text = text.replace('<br \/>', '[CR]')
     text = text.replace('<em>', '[I]').replace('</em>', '[/I]')
     text = text.replace('&amp;', '&')
     text = text.replace('&gt;', '>').replace('&lt;', '<')
     text = text.replace('&#39;', "'").replace('&quot;', '"')
-    text = re.sub("\n\\.$", "", text)
+
+    #  TODO: should \\ be \?
+
+    text = re.sub(r"\n\\.$", "", text)
     text = text.replace('User-contributed text is available under the Creative Commons By-SA License and may also be available under the GNU FDL.', '')
     removals = {'\u200b', " ", "\n"}
     while text:

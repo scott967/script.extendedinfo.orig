@@ -6,13 +6,13 @@
 import re
 import urllib.request, urllib.parse, urllib.error
 
-from kodi65 import kodijson
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import selectdialog
-from kodi65 import VideoItem
-from kodi65 import ItemList
-from kodi65 import local_db
+from kutils import kodijson
+from kutils import addon
+from kutils import utils
+from kutils import selectdialog
+from kutils import VideoItem
+from kutils import ItemList
+from kutils import local_db
 
 TMDB_KEY = '34142515d9d23817496eeb4ff1d223d0'
 POSTER_SIZES = ["w92", "w154", "w185", "w342", "w500", "w780", "original"]
@@ -405,7 +405,7 @@ def handle_reviews(results):
     for item in results:
         listitem = VideoItem(label=item.get('author'))
         listitem.set_properties({'author': item.get('author'),
-                                 'content': re.sub("<a.*?</a>", "", item.get('content')).lstrip(),
+                                 'content': re.sub(r"<a.*?</a>", "", item.get('content')).lstrip(),
                                  'id': item.get('id'),
                                  'url': item.get('url')})
         listitems.append(listitem)
@@ -533,7 +533,7 @@ def handle_companies(results):
 
 
 def search_companies(company_name):
-    regex = re.compile('\(.+?\)')
+    regex = re.compile(r'\(.+?\)')
     response = get_data(url="search/company",
                         params={"query": regex.sub('', company_name)},
                         cache_days=10)
@@ -1242,6 +1242,7 @@ def search_media(media_name=None, year='', media_type="movie", cache_days=1):
     for item in response['results']:
         if item['id']:
             return item['id']
+
 
 Login = LoginProvider(username=addon.setting("tmdb_username"),
                       password=addon.setting("tmdb_password"))
