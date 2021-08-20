@@ -4,7 +4,6 @@
 # This program is Free Software see LICENSE file for details
 
 
-
 import time
 import os
 import shutil
@@ -19,13 +18,13 @@ from resources.lib import TheAudioDB as AudioDB
 from resources.lib import TheMovieDB as tmdb
 from .WindowManager import wm
 
-from kodi65 import youtube
-from kodi65 import local_db
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import busy
-from kodi65 import kodijson
-from kodi65 import favs
+from kutils import youtube
+from kutils import local_db
+from kutils import addon
+from kutils import utils
+from kutils import busy
+from kutils import kodijson
+from kutils import favs
 
 
 def start_info_actions(info, params):
@@ -325,6 +324,9 @@ def start_info_actions(info, params):
         if not search_str and params.get("search"):
             result = xbmcgui.Dialog().input(heading=addon.LANG(16017),
                                             type=xbmcgui.INPUT_ALPHANUM)
+            #  TODO: Doc says result is a str.
+            #   Should result > -1 be len(result) > 0?
+
             if result and result > -1:
                 search_str = result
             else:
