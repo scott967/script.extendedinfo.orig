@@ -28,10 +28,10 @@ ch = ActionHandler()
 class DialogVideoInfo(DialogBaseInfo):
 
     def __init__(self, *args, **kwargs):
-        super(DialogVideoInfo, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def onClick(self, control_id):
-        super(DialogVideoInfo, self).onClick(control_id)
+        super().onClick(control_id)
         ch.serve(control_id, self)
 
     def set_buttons(self):

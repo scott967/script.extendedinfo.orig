@@ -53,7 +53,7 @@ class DialogTVShowInfo(DialogVideoInfo):
              (ID_LIST_BACKDROPS, "backdrops")]
 
     def __init__(self, *args, **kwargs) -> None:
-        super(DialogTVShowInfo, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         data = tmdb.extended_tvshow_info(tvshow_id=kwargs.get('tmdb_id'),
                                          dbid=kwargs.get('dbid'))
         if not data:
@@ -66,11 +66,11 @@ class DialogTVShowInfo(DialogVideoInfo):
 
     def onInit(self):
         self.get_youtube_vids("%s tv" % (self.info.get_info("title")))
-        super(DialogTVShowInfo, self).onInit()
-        super(DialogTVShowInfo, self).update_states()
+        super().onInit()
+        super().update_states()
 
     def onClick(self, control_id):
-        super(DialogTVShowInfo, self).onClick(control_id)
+        super().onClick(control_id)
         ch.serve(control_id, self)
 
     def set_buttons(self):
@@ -160,4 +160,4 @@ class DialogTVShowInfo(DialogVideoInfo):
         info = tmdb.get_tvshow(tvshow_id=self.info.get_property("id"),
                                cache_days=0)
         self.states = info.get("account_states")
-        super(DialogTVShowInfo, self).update_states()
+        super().update_states()

@@ -27,7 +27,7 @@ class DialogActorInfo(DialogBaseInfo):
              (750, "tagged_images")]
 
     def __init__(self, *args, **kwargs):
-        super(DialogActorInfo, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         data = tmdb.extended_actor_info(actor_id=kwargs.get('id'))
         if not data:
             return
@@ -36,10 +36,10 @@ class DialogActorInfo(DialogBaseInfo):
 
     def onInit(self):
         self.get_youtube_vids(self.info.label)
-        super(DialogActorInfo, self).onInit()
+        super().onInit()
 
     def onClick(self, control_id):
-        super(DialogActorInfo, self).onClick(control_id)
+        super().onClick(control_id)
         ch.serve(control_id, self)
 
     @ch.click(ID_CONTROL_PLOT)

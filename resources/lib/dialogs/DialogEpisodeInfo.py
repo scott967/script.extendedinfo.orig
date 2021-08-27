@@ -29,7 +29,7 @@ class DialogEpisodeInfo(DialogVideoInfo):
 
     @busy.set_busy
     def __init__(self, *args, **kwargs):
-        super(DialogEpisodeInfo, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.tvshow_id = kwargs.get('tvshow_id')
         tv_info = tmdb.get_tvshow(self.tvshow_id, light=True)
         data = tmdb.extended_episode_info(tvshow_id=self.tvshow_id,
@@ -43,15 +43,15 @@ class DialogEpisodeInfo(DialogVideoInfo):
         self.info.update_properties(image_info)
 
     def onInit(self):
-        super(DialogEpisodeInfo, self).onInit()
+        super().onInit()
         search_str = '{} "Season {}" "Episode {}"'.format(self.info.get_info("tvshowtitle"),
                                                           self.info.get_info('season'),
                                                           self.info.get_info('episode'))
         self.get_youtube_vids(search_str)
-        super(DialogEpisodeInfo, self).update_states()
+        super().update_states()
 
     def onClick(self, control_id):
-        super(DialogEpisodeInfo, self).onClick(control_id)
+        super().onClick(control_id)
         ch.serve(control_id, self)
 
     @ch.click(ID_BUTTON_RATED)
@@ -73,7 +73,7 @@ class DialogEpisodeInfo(DialogVideoInfo):
                                 episode=self.info.get_info("episode"),
                                 cache_days=0)
         self.states = info.get("account_states")
-        super(DialogEpisodeInfo, self).update_states()
+        super().update_states()
 
     def get_manage_options(self):
         return [(addon.LANG(1049), "Addon.OpenSettings(script.extendedinfo)")]

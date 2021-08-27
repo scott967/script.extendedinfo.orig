@@ -85,18 +85,18 @@ def get_window(window_type):
             self.type = kwargs.get('type', "movie")
             self.list_id = kwargs.get("list_id", False)
             self.logged_in = tmdb.Login.check_login()
-            super(DialogVideoList, self).__init__(*args, **kwargs)
+            super().__init__(*args, **kwargs)
 
         def onClick(self, control_id):
-            super(DialogVideoList, self).onClick(control_id)
+            super().onClick(control_id)
             ch.serve(control_id, self)
 
         def onAction(self, action):
-            super(DialogVideoList, self).onAction(action)
+            super().onAction(action)
             ch.serve_action(action, self.getFocusId(), self)
 
         def update_ui(self):
-            super(DialogVideoList, self).update_ui()
+            super().update_ui()
             self.getControl(ID_BUTTON_CERTFILTER).setVisible(self.type != "tv")
             self.getControl(ID_BUTTON_ACTORFILTER).setVisible(self.type != "tv")
             self.getControl(ID_BUTTON_KEYWORDFILTER).setVisible(self.type != "tv")
@@ -191,8 +191,8 @@ def get_window(window_type):
                 kwargs["label"] = "< %s" % kwargs["label"]
             if kwargs["key"].endswith(".gte"):
                 kwargs["label"] = "> %s" % kwargs["label"]
-            super(DialogVideoList, self).add_filter(force_overwrite=kwargs["key"].endswith((".gte", ".lte")),
-                                                    **kwargs)
+            super().add_filter(force_overwrite=kwargs["key"].endswith((".gte", ".lte")),
+                                **kwargs)
 
         @ch.click(ID_BUTTON_ORDER)
         def toggle_order(self, control_id):

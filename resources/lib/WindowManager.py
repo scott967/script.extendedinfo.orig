@@ -40,7 +40,7 @@ else:
     ACTOR_XML = ACTOR_XML_CLASSIC
 
 
-class WindowManager(object):
+class WindowManager:
     window_stack = []
 
     def __init__(self):
@@ -55,7 +55,7 @@ class WindowManager(object):
         open movie info, deal with window stack
         """
         busy.show_busy()
-        from .dialogs.DialogMovieInfo import DialogMovieInfo
+        from resources.lib.dialogs.DialogMovieInfo import DialogMovieInfo
         dbid = int(dbid) if dbid and int(dbid) > 0 else None
         if not movie_id:
             movie_id = tmdb.get_movie_tmdb_id(imdb_id=imdb_id,

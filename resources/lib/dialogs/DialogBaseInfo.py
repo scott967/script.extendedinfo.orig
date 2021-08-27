@@ -36,7 +36,7 @@ class DialogBaseInfo(windows.DialogXML):
     ACTION_EXIT_SCRIPT = [13, 10]
 
     def __init__(self, *args, **kwargs):
-        super(DialogBaseInfo, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.logged_in = tmdb.Login.check_login()
         self.bouncing = False
         self.last_focus = None
@@ -48,7 +48,7 @@ class DialogBaseInfo(windows.DialogXML):
         self.last_position = None
 
     def onInit(self, *args, **kwargs):
-        super(DialogBaseInfo, self).onInit()
+        super().onInit()
         # self.set_buttons()
         self.info.to_windowprops(window_id=self.window_id)
         for container_id, key in self.LISTS:
@@ -74,7 +74,7 @@ class DialogBaseInfo(windows.DialogXML):
         ch.serve_action(action, self.getFocusId(), self)
 
     def onClick(self, control_id):
-        super(DialogBaseInfo, self).onClick(control_id)
+        super().onClick(control_id)
         ch.serve(control_id, self)
 
     def onFocus(self, control_id):
@@ -95,7 +95,7 @@ class DialogBaseInfo(windows.DialogXML):
             self.last_position = None
         addon.set_global("infobackground", "")
         self.last_control = self.getFocusId()
-        super(DialogBaseInfo, self).close()
+        super().close()
 
     @utils.run_async
     def bounce(self, identifier):

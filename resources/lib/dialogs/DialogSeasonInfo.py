@@ -24,7 +24,7 @@ class DialogSeasonInfo(DialogVideoInfo):
              (1350, "backdrops")]
 
     def __init__(self, *args, **kwargs):
-        super(DialogSeasonInfo, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.tvshow_id = kwargs.get('id')
         data = tmdb.extended_season_info(tvshow_id=self.tvshow_id,
                                          season_number=kwargs.get('season'))
@@ -38,10 +38,10 @@ class DialogSeasonInfo(DialogVideoInfo):
 
     def onInit(self):
         self.get_youtube_vids("%s %s tv" % (self.info.get_info("tvshowtitle"), self.info.get_info('title')))
-        super(DialogSeasonInfo, self).onInit()
+        super().onInit()
 
     def onClick(self, control_id):
-        super(DialogSeasonInfo, self).onClick(control_id)
+        super().onClick(control_id)
         ch.serve(control_id, self)
 
     def get_manage_options(self):

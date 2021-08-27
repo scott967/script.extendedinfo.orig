@@ -54,7 +54,7 @@ STATUS = {"released": addon.LANG(32071),
           "planned": addon.LANG(32076)}
 
 
-class LoginProvider(object):
+class LoginProvider:
 
     def __init__(self, *args, **kwargs):
         self.session_id = None
