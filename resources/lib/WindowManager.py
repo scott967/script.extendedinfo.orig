@@ -114,7 +114,7 @@ class WindowManager:
             if response["results"]:
                 tvshow_id = str(response['results'][0]['id'])
             else:
-                params = {"query": re.sub('\(.*?\)', '', tvshow),
+                params = {"query": re.sub(r'\(.*?\)', '', tvshow),
                           "language": addon.setting("language")}
                 response = tmdb.get_data(url="search/tv",
                                          params=params,
