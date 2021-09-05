@@ -108,15 +108,12 @@ class LastFM(AbstractLastFM):
             return ""
         text = re.sub(r'(From Wikipedia, the free encyclopedia)|(Description above from the Wikipedia.*?Wikipedia)', '', text)
         text = re.sub(r'<(.|\n|\r)*?>', '', text)
-        text = text.replace('<br \/>', '[CR]')
+        text = text.replace('<br />', '[CR]')
         text = text.replace('<em>', '[I]').replace('</em>', '[/I]')
         text = text.replace('&amp;', '&')
         text = text.replace('&gt;', '>').replace('&lt;', '<')
         text = text.replace('&#39;', "'").replace('&quot;', '"')
-
-        #  TODO: should \\ be \?
-
-        text = re.sub(r"\n\\.$", "", text)
+        text = re.sub(r'\n\\.$', "", text)
         text = text.replace('User-contributed text is available under the Creative Commons By-SA License and may also be available under the GNU FDL.', '')
         removals = {'\u200b', " ", "\n"}
         while text:
