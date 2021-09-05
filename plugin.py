@@ -107,7 +107,7 @@ def trakt():
              ("premiereepisodes", addon.LANG(32029))]
     for key, value in items:
         li = xbmcgui.ListItem(label=value)
-        li.setArt({'thumb': "DefaultFolder"})
+        li.setArt({'thumb': "DefaultFolder.png"})
         url = 'plugin://script.extendedinfo?info=%s' % key
         xbmcplugin.addDirectoryItem(handle=plugin.handle,
                                     url=url,
