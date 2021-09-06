@@ -3,17 +3,9 @@
 # Copyright (C) 2015 - Philipp Temminghoff <phil65@kodi.tv>
 # This program is Free Software see LICENSE file for details
 
-import sys
-
-# numpy can NOT be loaded multiple times in a sub-interpreter.
-# Since numpy is optional, force it to NEVER be imported.
-
-sys.modules['numpy'] = None
-
-from resources.lib import process
 
 from kutils import addon
-from kutils import utils
+from resources.lib import process
 
 
 def pass_list_to_skin(name, data, prefix="", limit: int = 0):
@@ -36,7 +28,6 @@ def pass_list_to_skin(name, data, prefix="", limit: int = 0):
 class Main:
 
     def __init__(self):
-        utils.log("version %s started" % addon.VERSION)
         addon.set_global("extendedinfo_running", "true")
         self._parse_argv()
         for info in self.infos:
@@ -67,4 +58,4 @@ class Main:
 
 if (__name__ == "__main__"):
     Main()
-utils.log('finished')
+
