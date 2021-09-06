@@ -3,6 +3,7 @@
 # Copyright (C) 2015 - Philipp Temminghoff <phil65@kodi.tv>
 # This program is Free Software see LICENSE file for details
 
+import sys
 
 from kutils import addon
 from resources.lib import process
