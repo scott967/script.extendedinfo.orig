@@ -4,6 +4,12 @@
 # This program is Free Software see LICENSE file for details
 
 import sys
+
+# numpy can NOT be loaded multiple times in a sub-interpreter.
+# Since numpy is optional, force it to NEVER be imported.
+
+sys.modules['numpy'] = None
+
 import os
 
 import xbmcplugin

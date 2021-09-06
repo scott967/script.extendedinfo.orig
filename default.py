@@ -5,6 +5,11 @@
 
 import sys
 
+# numpy can NOT be loaded multiple times in a sub-interpreter.
+# Since numpy is optional, force it to NEVER be imported.
+
+sys.modules['numpy'] = None
+
 from resources.lib import process
 
 from kutils import addon
