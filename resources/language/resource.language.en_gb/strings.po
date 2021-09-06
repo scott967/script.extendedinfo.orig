@@ -764,3 +764,7 @@ msgstr ""
 msgctxt "#32172"
 msgid "Youtube API Key"
 msgstr ""
+
+msgctxt "#32173"
+msgid "Extended Info"
+msgstr ""
