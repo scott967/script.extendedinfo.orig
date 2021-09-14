@@ -16,7 +16,7 @@ from kutils import busy
 from kutils import DialogBaseList
 from kutils import ActionHandler
 
-ch = ActionHandler()
+ch: ActionHandler = ActionHandler()
 
 ID_BUTTON_SORTTYPE = 5001
 ID_BUTTON_PUBLISHEDFILTER = 5002

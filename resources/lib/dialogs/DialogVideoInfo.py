@@ -22,7 +22,7 @@ ID_BUTTON_MANAGE = 445
 ID_BUTTON_SETRATING = 6001
 ID_BUTTON_FAV = 6003
 
-ch = ActionHandler()
+ch: ActionHandler = ActionHandler()
 
 
 class DialogVideoInfo(DialogBaseInfo):

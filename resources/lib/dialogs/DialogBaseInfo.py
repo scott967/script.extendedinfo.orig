@@ -19,7 +19,7 @@ from kutils import VideoItem
 from kutils import ActionHandler
 from kutils import windows
 
-ch = ActionHandler()
+ch: ActionHandler = ActionHandler()
 
 ID_LIST_YOUTUBE = 350
 ID_LIST_IMAGES = 1250

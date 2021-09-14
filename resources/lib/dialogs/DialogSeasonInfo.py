@@ -11,7 +11,7 @@ from kutils import utils
 from kutils import addon
 from kutils import ActionHandler
 
-ch = ActionHandler()
+ch: ActionHandler = ActionHandler()
 
 
 class DialogSeasonInfo(DialogVideoInfo):

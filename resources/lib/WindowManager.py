@@ -250,4 +250,4 @@ class WindowManager:
             self.active_dialog.doModal()
 
 
-wm = WindowManager()
+wm: WindowManager = WindowManager()

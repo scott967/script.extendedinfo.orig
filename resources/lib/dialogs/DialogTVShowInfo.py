@@ -33,7 +33,7 @@ ID_BUTTON_BROWSE = 120
 ID_BUTTON_OPENLIST = 6002
 ID_BUTTON_RATED = 6006
 
-ch = ActionHandler()
+ch: ActionHandler = ActionHandler()
 
 
 class DialogTVShowInfo(DialogVideoInfo):

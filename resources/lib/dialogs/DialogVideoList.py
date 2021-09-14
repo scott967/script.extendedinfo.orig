@@ -29,7 +29,7 @@ ID_BUTTON_RUNTIMEFILTER = 5011
 ID_BUTTON_VOTECOUNTFILTER = 5012
 ID_BUTTON_ACCOUNT = 7000
 
-ch = ActionHandler()
+ch: ActionHandler = ActionHandler()
 
 include_adult = addon.setting("include_adults").lower()
 

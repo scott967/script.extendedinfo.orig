@@ -16,7 +16,7 @@ from kutils import ActionHandler
 
 ID_BUTTON_RATED = 6006
 
-ch = ActionHandler()
+ch: ActionHandler = ActionHandler()
 
 
 class DialogEpisodeInfo(DialogVideoInfo):

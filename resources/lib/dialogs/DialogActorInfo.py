@@ -14,7 +14,7 @@ from kutils import ActionHandler
 
 ID_CONTROL_PLOT = 132
 
-ch = ActionHandler()
+ch: ActionHandler = ActionHandler()
 
 
 class DialogActorInfo(DialogBaseInfo):
