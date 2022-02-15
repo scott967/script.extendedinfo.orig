@@ -7,15 +7,17 @@ import urllib.request, urllib.parse, urllib.error
 
 import xbmc
 
-from kodi65 import utils
-from kodi65 import addon
-from kodi65 import local_db
-from kodi65 import AudioItem, VideoItem
-from kodi65 import ItemList
+from kutils import addon
+from kutils import AudioItem
+from kutils import ItemList
+from kutils import local_db
+from kutils import utils
+from kutils import VideoItem
+
 
 
 AUDIO_DB_KEY = '58353d43204d68753987fl'
-BASE_URL = 'http://www.theaudiodb.com/api/v1/json/%s/' % (AUDIO_DB_KEY)
+BASE_URL = 'https://www.theaudiodb.com/api/v1/json/%s/' % (AUDIO_DB_KEY)
 PLUGIN_BASE = 'plugin://script.extendedinfo/?info='
 
 
@@ -144,10 +146,18 @@ def extended_artist_info(results):
 
 
 def get_artist_discography(search_str):
+    """returns artist's discography
+
+    Args:
+        search_str (str): Artist name
+
+    Returns:
+        [type]: [description]
+    """
     if not search_str:
         return ItemList(content_type="albums")
     params = {"s": search_str}
-    results = get_data("searchalbum", params)
+    results: dict = get_data("searchalbum", params)
     return handle_albums(results)
 
 
@@ -201,7 +211,16 @@ def get_track_details(audiodb_id):
     return handle_tracks(results)
 
 
-def get_data(url, params):
+def get_data(url, params) -> dict:
+    """returns a dict from TADB api query
+
+    Args:
+        url (str): the TADB GET query
+        params (dict): TADB query pamaeters
+
+    Returns:
+        dict: TADB api response
+    """
     params = {k: str(v) for k, v in params.items() if v}
     url = "%s%s.php?%s" % (BASE_URL, url, urllib.parse.urlencode(params))
     return utils.get_JSON_response(url=url,

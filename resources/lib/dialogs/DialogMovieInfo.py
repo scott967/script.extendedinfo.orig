@@ -13,12 +13,12 @@ from resources.lib import omdb
 from resources.lib.WindowManager import wm
 from .DialogVideoInfo import DialogVideoInfo
 
-from kodi65 import imagetools
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import kodijson
-from kodi65 import busy
-from kodi65 import ActionHandler
+from kutils import ActionHandler
+from kutils import addon
+from kutils import busy
+from kutils import imagetools
+from kutils import kodijson
+from kutils import utils
 
 ID_LIST_SIMILAR = 150
 ID_LIST_SETS = 250
@@ -223,15 +223,15 @@ class DialogMovieInfo(DialogVideoInfo):
         options = []
         movie_id = self.info.get_info("dbid")
         imdb_id = self.info.get_property("imdb_id")
-        if movie_id:
-            call = "RunScript(script.artwork.downloader,mediatype=movie,dbid={}%s)".format(movie_id)
-            options += [(addon.LANG(413), call % ",mode=gui"),
-                        (addon.LANG(14061), call % ""),
-                        (addon.LANG(32101), call % ",mode=custom,extrathumbs"),
-                        (addon.LANG(32100), call % ",mode=custom")]
-        else:
-            options += [(addon.LANG(32165), "RunPlugin(plugin://plugin.video.couchpotato_manager/movies/add?imdb_id=%s)" % imdb_id),
-                        (addon.LANG(32170), "RunPlugin(plugin://plugin.video.trakt_list_manager/watchlist/movies/add?imdb_id=%s)" % imdb_id)]
+        #if movie_id:
+            #call = "RunScript(script.artwork.downloader,mediatype=movie,dbid={}%s)".format(movie_id)
+            #options += [(addon.LANG(413), call % ",mode=gui"),
+            #            (addon.LANG(14061), call % ""),
+            #            (addon.LANG(32101), call % ",mode=custom,extrathumbs"),
+            #            (addon.LANG(32100), call % ",mode=custom")]
+        #else:
+        options += [(addon.LANG(32165), "RunPlugin(plugin://plugin.video.couchpotato_manager/movies/add?imdb_id=%s)" % imdb_id),
+                    (addon.LANG(32170), "RunPlugin(plugin://plugin.video.trakt_list_manager/watchlist/movies/add?imdb_id=%s)" % imdb_id)]
         options.append((addon.LANG(1049), "Addon.OpenSettings(script.extendedinfo)"))
         return options
 

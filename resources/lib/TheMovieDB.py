@@ -4,15 +4,16 @@
 # This program is Free Software see LICENSE file for details
 
 import re
+from typing import Optional
 import urllib.request, urllib.parse, urllib.error
 
-from kodi65 import kodijson
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import selectdialog
-from kodi65 import VideoItem
-from kodi65 import ItemList
-from kodi65 import local_db
+from kutils import addon
+from kutils import ItemList
+from kutils import kodijson
+from kutils import local_db
+from kutils import selectdialog
+from kutils import utils
+from kutils import VideoItem
 
 TMDB_KEY = '34142515d9d23817496eeb4ff1d223d0'
 POSTER_SIZES = ["w92", "w154", "w185", "w342", "w500", "w780", "original"]
@@ -27,7 +28,7 @@ HEADERS = {
 }
 IMAGE_BASE_URL = "http://image.tmdb.org/t/p/"
 POSTER_SIZE = "w500"
-URL_BASE = "http{}://api.themoviedb.org/3/".format("s" if addon.bool_setting("use_https") else "")
+URL_BASE = "https://api.themoviedb.org/3/"
 ALL_MOVIE_PROPS = "account_states,alternative_titles,credits,images,keywords,release_dates,videos,translations,similar,reviews,lists,rating"
 ALL_TV_PROPS = "account_states,alternative_titles,content_ratings,credits,external_ids,images,keywords,rating,similar,translations,videos"
 ALL_ACTOR_PROPS = "tv_credits,movie_credits,combined_credits,images,tagged_images"
@@ -54,8 +55,10 @@ STATUS = {"released": addon.LANG(32071),
           "planned": addon.LANG(32076)}
 
 
-class LoginProvider(object):
-
+class LoginProvider:
+    """
+    logs into TMDB for user or guest and gets corresponding session id
+    """
     def __init__(self, *args, **kwargs):
         self.session_id = None
         self.logged_in = False
@@ -617,7 +620,19 @@ def get_set_id(set_name):
     return response["results"][0]["id"]
 
 
-def get_data(url="", params=None, cache_days=14):
+def get_data(url:str="", params:Optional[dict]=None, cache_days:float=14):
+    """Queries tmdb api v3 or local cache
+
+    Args:
+        url (str, optional): tmdb query url. Defaults to "".
+        params (Optional[dict], optional): Dict of optional parameters for 
+                                           query. Defaults to None.
+        cache_days (float, optional): Days to check for cached values.
+                                      Defaults to 14.
+
+    Returns:
+        [type]: [description]
+    """
     params = params if params else {}
     params["api_key"] = TMDB_KEY
     params = {k: str(v) for k, v in params.items() if v}
@@ -1167,11 +1182,15 @@ def get_tvshows(tvshow_type):
     return handle_tvshows(response["results"], False, None)
 
 
-def get_movies(movie_type):
-    '''
-    return list with movies
-    available types: now_playing, upcoming, top_rated, popular
-    '''
+def get_movies(movie_type:str) -> list:
+    """gets list with movies of movie_type from tmdb
+
+    Args:
+        movie_type (str): now_playing, upcoming, top_rated, popular
+
+    Returns:
+        list: [description]
+    """
     response = get_data(url="movie/%s" % (movie_type),
                         params={"language": addon.setting("LanguageID")},
                         cache_days=0.3)

@@ -9,10 +9,10 @@ import xbmcgui
 from resources.lib import TheMovieDB as tmdb
 from resources.lib.WindowManager import wm
 
-from kodi65 import imagetools
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import ActionHandler
+from kutils import ActionHandler
+from kutils import addon
+from kutils import imagetools
+from kutils import utils
 
 from .DialogVideoInfo import DialogVideoInfo
 

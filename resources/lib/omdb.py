@@ -3,9 +3,9 @@
 # Copyright (C) 2015 - Philipp Temminghoff <phil65@kodi.tv>
 # This program is Free Software see LICENSE file for details
 
-from kodi65 import utils
+from kutils import utils
 
-BASE_URL = "http://www.omdbapi.com/?tomatoes=true&plot=full&r=json&"
+BASE_URL = "https://www.omdbapi.com/?tomatoes=true&plot=full&r=json&"
 
 
 def get_movie_info(imdb_id):

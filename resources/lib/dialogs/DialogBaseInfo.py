@@ -9,15 +9,15 @@ import xbmcgui
 from resources.lib import TheMovieDB as tmdb
 from resources.lib.WindowManager import wm
 
-from kodi65 import youtube
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import kodijson
-from kodi65 import selectdialog
-from kodi65 import slideshow
-from kodi65 import VideoItem
-from kodi65 import ActionHandler
-from kodi65 import windows
+from kutils import ActionHandler
+from kutils import addon
+from kutils import kodijson
+from kutils import selectdialog
+from kutils import slideshow
+from kutils import utils
+from kutils import VideoItem
+from kutils import windows
+from kutils import youtube
 
 ch = ActionHandler()
 
@@ -246,7 +246,7 @@ class DialogBaseInfo(windows.DialogXML):
             self.close()
 
     @ch.action("previousmenu", "*")
-    def exit_script(self, control_id):
+    def exit_script(self,*args):
         self.exit()
 
     @utils.run_async

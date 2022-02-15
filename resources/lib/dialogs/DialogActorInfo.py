@@ -8,9 +8,9 @@ import xbmcgui
 from resources.lib import TheMovieDB as tmdb
 from .DialogBaseInfo import DialogBaseInfo
 
-from kodi65 import imagetools
-from kodi65 import addon
-from kodi65 import ActionHandler
+from kutils import imagetools
+from kutils import addon
+from kutils import ActionHandler
 
 ID_CONTROL_PLOT = 132
 

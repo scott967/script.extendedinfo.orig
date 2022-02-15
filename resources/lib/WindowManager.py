@@ -12,12 +12,12 @@ import xbmcvfs
 
 from . import TheMovieDB as tmdb
 
-from kodi65 import windows
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import busy
-from kodi65 import player
-from kodi65 import local_db
+from kutils import addon
+from kutils import busy
+from kutils import local_db
+from kutils import player
+from kutils import utils
+from kutils import windows
 
 INFO_XML_CLASSIC = 'script-%s-DialogVideoInfo.xml' % (addon.ID)
 LIST_XML_CLASSIC = 'script-%s-VideoList.xml' % (addon.ID)
@@ -179,8 +179,17 @@ class WindowManager(object):
 
     def open_video_list(self, listitems=None, filters=None, mode="filter", list_id=False,
                         filter_label="", force=False, media_type="movie", search_str=""):
-        """
-        open video list, deal with window stack
+        """opens video list  deals with window stack items
+
+        Args:
+            listitems (dict, optional): [description]. Defaults to None.
+            filters ([type], optional): [description]. Defaults to None.
+            mode (str, optional): [description]. Defaults to "filter".
+            list_id (bool, optional): [description]. Defaults to False.
+            filter_label (str, optional): [description]. Defaults to "".
+            force (bool, optional): [description]. Defaults to False.
+            media_type (str, optional): [description]. Defaults to "movie".
+            search_str (str, optional): [description]. Defaults to "".
         """
         from .dialogs import DialogVideoList
         Browser = DialogVideoList.get_window(windows.DialogXML)

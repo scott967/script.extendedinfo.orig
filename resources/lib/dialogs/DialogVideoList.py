@@ -9,13 +9,13 @@ import xbmcgui
 from resources.lib import TheMovieDB as tmdb
 from resources.lib.WindowManager import wm
 
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import busy
-from kodi65 import confirmdialog
-from kodi65 import selectdialog
-from kodi65 import ActionHandler
-from kodi65 import DialogBaseList
+from kutils import ActionHandler
+from kutils import addon
+from kutils import busy
+from kutils import confirmdialog
+from kutils import DialogBaseList
+from kutils import selectdialog
+from kutils import utils
 
 ID_BUTTON_SORT = 5001
 ID_BUTTON_GENREFILTER = 5002
@@ -31,10 +31,19 @@ ID_BUTTON_ACCOUNT = 7000
 
 ch = ActionHandler()
 
-include_adult = addon.setting("include_adults").lower()
+include_adult: bool = addon.setting("include_adults").lower()
 
 
 def get_window(window_type):
+    """[summary]
+
+    Args:
+        window_type (class instance): xbmc XML dialog window or 
+            xbmc XML window objects
+
+    Returns:
+        [DialogVideoList]: a new XML dialog or window
+    """
 
     class DialogVideoList(DialogBaseList, window_type):
 

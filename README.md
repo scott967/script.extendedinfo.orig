@@ -90,11 +90,15 @@ Available Properties:
 
 - 'Title':            Movie Title
 - 'OriginalTitle':    Movie OriginalTitle
-- 'ID':               TheMovieDB ID
+- 'Mediatype':        Video
+- 'Country:           ISO 639-2 country
+- 'Plot'              Plot
+- 'Trailer'           plugin:// path
+- 'Genre              Genre1[ / Genre2]
 - 'Rating':           Movie Rating (0-10)
 - 'Votes':            Vote Count for Rating
 - 'Year':             Release Year
-- 'Premiered':        Release Date
+- 'Premiered':        ISO 8601 Release Date
 
 Available Art:
 

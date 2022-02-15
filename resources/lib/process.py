@@ -5,9 +5,11 @@
 
 
 
-import time
+from typing import Dict
+
 import os
 import shutil
+import time
 
 import xbmc
 import xbmcgui
@@ -19,21 +21,31 @@ from resources.lib import TheAudioDB as AudioDB
 from resources.lib import TheMovieDB as tmdb
 from .WindowManager import wm
 
-from kodi65 import youtube
-from kodi65 import local_db
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import busy
-from kodi65 import kodijson
-from kodi65 import favs
+from kutils import addon
+from kutils import busy
+from kutils import favs
+from kutils import kodijson
+from kutils import local_db
+from kutils import utils
+from kutils import youtube
 
+def start_info_actions(info: str, params: Dict[str,str]):
+    """executes an action from info using any params
 
-def start_info_actions(info, params):
+    See README for list of possible actions
+
+    Args:
+        info (str): one of a defined list of possible actions
+        params (Dict[str,str]): Optional parameters for the action
+
+    Returns:
+        [type]: [description]
+    """
     if "artistname" in params:
         params["artistname"] = params.get("artistname", "").split(" feat. ")[0].strip()
         if not params.get("artist_mbid"):
             params["artist_mbid"] = utils.fetch_musicbrainz_id(params["artistname"])
-    utils.log(info)
+    utils.log('start_info_actions: ' + info)
     utils.pp(params)
     if "prefix" in params and not params["prefix"].endswith('.'):
         params["prefix"] = params["prefix"] + '.'

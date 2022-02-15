@@ -7,11 +7,11 @@ import datetime
 import urllib.request, urllib.parse, urllib.error
 from resources.lib import TheMovieDB as tmdb
 
-from kodi65 import addon
-from kodi65 import utils
-from kodi65 import local_db
-from kodi65 import VideoItem
-from kodi65 import ItemList
+from kutils import addon
+from kutils import ItemList
+from kutils import local_db
+from kutils import utils
+from kutils import VideoItem
 
 TRAKT_KEY = 'e9a7fba3fa1b527c08c073770869c258804124c5d7c984ce77206e695fbaddd5'
 BASE_URL = "https://api-v2launch.trakt.tv/"

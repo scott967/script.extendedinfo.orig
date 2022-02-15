@@ -11,8 +11,8 @@ import xbmcgui
 
 from resources.lib import process
 
-from kodi65 import addon
-from kodi65 import utils
+from kutils import addon
+from kutils import utils
 import routing
 
 MOVIEDB_IMAGE = os.path.join(addon.MEDIA_PATH, "moviedb.png")

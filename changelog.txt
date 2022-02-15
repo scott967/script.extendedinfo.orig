@@ -1,3 +1,7 @@
+v6.0.1
+- Move codebase to python3
+- Kodi Matrix / Nexus changes
+- Replace module kodi65 with kutils
 v5.6.0
 - Fix support for Kodi L* nightlies
 - Browser window improvements
