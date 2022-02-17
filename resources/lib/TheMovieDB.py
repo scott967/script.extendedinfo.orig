@@ -4,7 +4,7 @@
 # This program is Free Software see LICENSE file for details
 
 import re
-from typing import Optional
+from typing import Optional, Union, List
 import urllib.request, urllib.parse, urllib.error
 
 from kutils import addon
@@ -265,12 +265,12 @@ def handle_multi_search(results):
     return listitems
 
 
-def handle_movies(results, local_first=True, sortkey="year"):
-    response = get_data(url="genre/movie/list",
+def handle_movies(results: List[dict], local_first=True, sortkey="year"):
+    response: dict = get_data(url="genre/movie/list",
                         params={"language": addon.setting("LanguageID")},
                         cache_days=30)
-    ids = [item["id"] for item in response["genres"]]
-    labels = [item["name"] for item in response["genres"]]
+    ids: List[int] = [item["id"] for item in response["genres"]]
+    labels: List[str] = [item["name"] for item in response["genres"]]
     movies = ItemList(content_type="movies")
     path = 'extendedinfo&&id=%s' if addon.bool_setting("infodialog_onclick") else "playtrailer&&id=%s"
     for movie in results:
@@ -620,7 +620,7 @@ def get_set_id(set_name):
     return response["results"][0]["id"]
 
 
-def get_data(url:str="", params:Optional[dict]=None, cache_days:float=14):
+def get_data(url:str="", params:Optional[dict]=None, cache_days:float=14) -> Optional[dict]:
     """Queries tmdb api v3 or local cache
 
     Args:
@@ -631,7 +631,7 @@ def get_data(url:str="", params:Optional[dict]=None, cache_days:float=14):
                                       Defaults to 14.
 
     Returns:
-        [type]: [description]
+        dict: A dict of JSON.loads response from TMDB or None
     """
     params = params if params else {}
     params["api_key"] = TMDB_KEY
@@ -1182,7 +1182,7 @@ def get_tvshows(tvshow_type):
     return handle_tvshows(response["results"], False, None)
 
 
-def get_movies(movie_type:str) -> list:
+def get_movies(movie_type:str) -> Union[list, dict]:
     """gets list with movies of movie_type from tmdb
 
     Args:
