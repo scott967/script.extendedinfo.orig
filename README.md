@@ -221,7 +221,7 @@ Available Art:
 - 'Fanart':   TVShow Fanart
 
 
-### TheAudioDB
+### TheAudioDB  Note:  TADB requires a subscription, no longer supported
 
 ```
 RunScript(script.extendedinfo,info=discography)         --> Discography.%d

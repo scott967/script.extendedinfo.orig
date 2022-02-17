@@ -54,6 +54,8 @@ class Main:
 
         Parse the invocation argument strings to create self.infos (called with
         info= args) list and self.params dict  (called with param=value pairs)
+        If started with no parameters, opens the video list dialog with movies
+        from TMDB retrieved by popularity.
         """
         utils.log("version {} started".format(addon.VERSION))
         addon.set_global("extendedinfo_running", "true")

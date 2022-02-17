@@ -387,7 +387,7 @@ def start_info_actions(info: str, params: Dict[str,str]):
                              tvshow_id=params.get("tvshow_id"),
                              dbid=params.get("dbid"),
                              episode=params.get("episode"),
-                             season=params.get("season"))
+                             season=int(params.get("season")))
         addon.clear_global('infodialogs.active')
     elif info == 'albuminfo':
         if params.get("id"):
