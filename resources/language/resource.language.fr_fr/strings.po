@@ -764,3 +764,11 @@ msgstr ""
 msgctxt "#32172"
 msgid "Youtube API Key"
 msgstr ""
+
+msgctxt "#32173"
+msgid "TADB API Key"
+msgstr ""
+
+msgctxt "#32174"
+msgid "OMDb API Key"
+msgstr ""

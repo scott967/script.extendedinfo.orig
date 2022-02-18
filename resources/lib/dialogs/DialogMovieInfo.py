@@ -243,7 +243,9 @@ class DialogMovieInfo(DialogVideoInfo):
         super(DialogMovieInfo, self).update_states()
 
     @utils.run_async
-    def set_omdb_infos_async(self):
+    def set_omdb_infos_async(self) -> None:
+        """ sets home window properties such as tomato for OMDb response items
+        """
         self.omdb_thread.join()
         utils.dict_to_windowprops(data=self.omdb_thread.listitems,
                                   prefix="omdb.",

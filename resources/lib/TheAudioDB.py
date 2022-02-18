@@ -4,6 +4,7 @@
 # This program is Free Software see LICENSE file for details
 
 import urllib.request, urllib.parse, urllib.error
+from typing import Union
 
 import xbmc
 
@@ -17,11 +18,19 @@ from kutils import VideoItem
 
 
 AUDIO_DB_KEY = '58353d43204d68753987fl'
-BASE_URL = 'https://www.theaudiodb.com/api/v1/json/%s/' % (AUDIO_DB_KEY)
+BASE_URL = 'https://www.theaudiodb.com/api/v1/json'
 PLUGIN_BASE = 'plugin://script.extendedinfo/?info='
 
 
 def handle_albums(results):
+    """[summary]
+
+    Args:
+        results ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     albums = ItemList(content_type="albums")
     if not results.get('album'):
         return albums
@@ -65,7 +74,7 @@ def handle_albums(results):
     return local_db.compare_album_with_library(albums)
 
 
-def handle_tracks(results):
+def handle_tracks(results: dict) -> ItemList:
     tracks = ItemList(content_type="songs")
     if not results.get('track'):
         return tracks
@@ -145,23 +154,31 @@ def extended_artist_info(results):
     return artist
 
 
-def get_artist_discography(search_str):
+def get_artist_discography(search_str) -> ItemList:
     """returns artist's discography
 
     Args:
         search_str (str): Artist name
 
     Returns:
-        [type]: [description]
+        [ItemList]: Kutils list instance of AudioItems
     """
     if not search_str:
         return ItemList(content_type="albums")
-    params = {"s": search_str}
+    params: dict = {"s": search_str}
     results: dict = get_data("searchalbum", params)
     return handle_albums(results)
 
 
-def get_artist_details(search_str):
+def get_artist_details(search_str) -> Union[ItemList, dict]:
+    """gets artist details from TADB
+
+    Args:
+        search_str [str]: artist name
+
+    Returns:
+        Union[ItemList, dict]: the extended artist info
+    """
     if not search_str:
         return ItemList(content_type="artists")
     params = {"s": search_str}
@@ -169,7 +186,16 @@ def get_artist_details(search_str):
     return extended_artist_info(results)
 
 
-def get_most_loved_tracks(search_str="", mbid=""):
+def get_most_loved_tracks(search_str="", mbid="") -> Union[ItemList, list]:
+    """ highest rated TADB soings for artist
+
+    Args:
+        search_str (str, optional): artist name. Defaults to "".
+        mbid (str, optional): musicbrainz artist id. Defaults to "".
+
+    Returns:
+        Union[ItemList, list]: list of songs
+    """
     if mbid:
         url = 'track-top10-mb'
         params = {"s": mbid}
@@ -203,7 +229,15 @@ def get_musicvideos(audiodb_id):
     return handle_musicvideos(results)
 
 
-def get_track_details(audiodb_id):
+def get_track_details(audiodb_id: str) -> Union[ItemList, list]:
+    """gets TADB info for a track
+
+    Args:
+        audiodb_id (str): The TADB id
+
+    Returns:
+        Union[ItemList, list]: List of track details
+    """
     if not audiodb_id:
         return ItemList(content_type="songs")
     params = {"m": audiodb_id}
@@ -211,7 +245,7 @@ def get_track_details(audiodb_id):
     return handle_tracks(results)
 
 
-def get_data(url, params) -> dict:
+def get_data(url: str, params: dict) -> dict:
     """returns a dict from TADB api query
 
     Args:
@@ -221,7 +255,8 @@ def get_data(url, params) -> dict:
     Returns:
         dict: TADB api response
     """
-    params = {k: str(v) for k, v in params.items() if v}
-    url = "%s%s.php?%s" % (BASE_URL, url, urllib.parse.urlencode(params))
+    tadb_key: str = addon.setting('TADB API Key')
+    params: dict = {k: str(v) for k, v in params.items() if v}
+    url: str = "{1}/{2}/{3}.php?{4}".format(BASE_URL, tadb_key, url, urllib.parse.urlencode(params))
     return utils.get_JSON_response(url=url,
                                    folder="TheAudioDB")

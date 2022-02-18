@@ -32,6 +32,26 @@
 						<heading>32172</heading>
 					</control>
 				</setting>
+				<setting help="" id="TADB API Key" label="32173" type="string">
+					<level>0</level>
+					<default/>
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control format="string" type="edit">
+						<heading>32173</heading>
+					</control>
+				</setting>
+				<setting help="" id="OMDb API Key" label="32174" type="string">
+					<level>0</level>
+					<default/>
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control format="string" type="edit">
+						<heading>32174</heading>
+					</control>
+				</setting>
 			</group>
 		</category>
 		<category help="" id="TheMovieDB" label="32171">

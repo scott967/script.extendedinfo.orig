@@ -50,7 +50,7 @@ def start_info_actions(info: str, params: Dict[str,str]):
     if "prefix" in params and not params["prefix"].endswith('.'):
         params["prefix"] = params["prefix"] + '.'
 
-    # Audio
+    # AudioDB / LastFM
     if info == 'discography':
         discography = AudioDB.get_artist_discography(params["artistname"])
         if not discography:
@@ -174,6 +174,7 @@ def start_info_actions(info: str, params: Dict[str,str]):
             for item in movies:
                 del item["credit_id"]
             return movies.reduce(key="department")
+    # Trakt info
     elif info == 'traktsimilarmovies':
         if params.get("id") or params.get("dbid"):
             if params.get("dbid"):
@@ -224,16 +225,19 @@ def start_info_actions(info: str, params: Dict[str,str]):
         return Trakt.get_movies("boxoffice")
     elif info == 'similarartistsinlibrary':
         return local_db.get_similar_artists(params.get("artist_mbid"))
+    # LastFM
     elif info == 'trackinfo':
         addon.clear_global('%sSummary' % params.get("prefix", ""))
         if params["artistname"] and params["trackname"]:
             track_info = LastFM.get_track_info(artist_name=params["artistname"],
                                                track=params["trackname"])
             addon.set_global('%sSummary' % params.get("prefix", ""), track_info["summary"])
-    elif info == 'topartistsnearevents':
-        artists = local_db.get_artists()
-        from . import BandsInTown
-        return BandsInTown.get_near_events(artists[0:49])
+    # Bands in town  API no longer provides event access
+    #  elif info == 'topartistsnearevents':
+    #    artists = local_db.get_artists()
+    #    from . import BandsInTown
+    #    return BandsInTown.get_near_events(artists[0:49])
+    # Youtube
     elif info == 'youtubesearchvideos':
         addon.set_global('%sSearchValue' % params.get("prefix", ""), params.get("id", ""))
         user_key = addon.setting("Youtube API Key")
@@ -249,6 +253,7 @@ def start_info_actions(info: str, params: Dict[str,str]):
         if user_name:
             playlists = youtube.get_user_playlists(user_name)
             return youtube.get_playlist_videos(playlists["uploads"])
+    # Kodi JSON API
     elif info == 'favourites':
         if params.get("id"):
             items = favs.get_favs_by_type(params["id"])
