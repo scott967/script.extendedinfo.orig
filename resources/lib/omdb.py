@@ -20,7 +20,7 @@ def get_movie_info(imdb_id: str) -> Optional[dict]:
         Optional[dict]: Json response from OMDb
     """
     omdb_key: str = addon.setting('OMDb API Key')
-    url = 'apikey={1}&i={2}'.format(omdb_key, imdb_id)
+    url = 'apikey={0}&i={1}'.format(omdb_key, imdb_id)
     results = utils.get_JSON_response(BASE_URL + url, 20, "OMDB")
     if not results:
         return None
