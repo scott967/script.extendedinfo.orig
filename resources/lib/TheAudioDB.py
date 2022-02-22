@@ -257,6 +257,6 @@ def get_data(url: str, params: dict) -> dict:
     """
     tadb_key: str = addon.setting('TADB API Key')
     params: dict = {k: str(v) for k, v in params.items() if v}
-    url: str = "{1}/{2}/{3}.php?{4}".format(BASE_URL, tadb_key, url, urllib.parse.urlencode(params))
+    url: str = "{0}/{1}/{2}.php?{3}".format(BASE_URL, tadb_key, url, urllib.parse.urlencode(params))
     return utils.get_JSON_response(url=url,
                                    folder="TheAudioDB")
