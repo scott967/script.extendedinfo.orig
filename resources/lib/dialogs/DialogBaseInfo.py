@@ -52,8 +52,8 @@ class DialogBaseInfo(windows.DialogXML):
                 self.getControl(container_id).reset()
                 items = [i.get_listitem() for i in self.lists[key]]
                 self.getControl(container_id).addItems(items)
-            except Exception:
-                utils.log("Notice: No container with id %i available" % container_id)
+            except Exception as err:
+                utils.log('Notice: No container with id {0} available and {1}'.format(container_id, err))
         if self.last_control:
             self.setFocusId(self.last_control)
         if self.last_control and self.last_position:
