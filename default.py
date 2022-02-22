@@ -28,8 +28,6 @@ def pass_list_to_skin(name, data, prefix="", limit: Optional[int]=False) -> None
     Returns:
         None
     """
-    #utils.log('type name: {} type data: {}'.format(type(name), type(data)))
-    #utils.log('dir data{}'.format(dir(data)))
     if data and limit and int(limit) < len(data):
         data = data[:int(limit)]
     if not data:
