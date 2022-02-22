@@ -155,7 +155,7 @@ def send_request(url, params, values, delete=False):
     params["api_key"] = TMDB_KEY
     params = {k: str(v) for k, v in params.items() if v}
     url = "%s%s?%s" % (URL_BASE, url, urllib.parse.urlencode(params))
-    utils.log(url)
+    #utils.log(url)
     if delete:
         return utils.delete(url, values=values, headers=HEADERS)
     else:
@@ -631,7 +631,8 @@ def get_data(url:str="", params:Optional[dict]=None, cache_days:float=14) -> Opt
                                       Defaults to 14.
 
     Returns:
-        dict: A dict of JSON.loads response from TMDB or None
+        dict: A dict of JSON.loads response from TMDB or None if no 
+        TMDB response
     """
     params = params if params else {}
     params["api_key"] = TMDB_KEY
@@ -749,14 +750,21 @@ def get_movie_videos(movie_id):
     return None
 
 
-def extended_movie_info(movie_id=None, dbid=None, cache_days=14):
-    '''
-    get listitem with extended info for movie with *movie_id
+def extended_movie_info(movie_id=None, dbid=None, cache_days=14) -> Optional[dict]:
+    """get listitem with extended info for movie with *movie_id
     merge in info from *dbid if available
-    '''
+
+    Args:
+        movie_id (str, optional): TMDB movie id. Defaults to None.
+        dbid (int, optional): Local library dbid. Defaults to None.
+        cache_days (int, optional): Days to use cached info. Defaults to 14.
+
+    Returns:
+        Optional[dict]: A dict of movie information
+    """
     if not movie_id:
         return None
-    info = get_movie(movie_id=movie_id, cache_days=cache_days)
+    info: Union[dict, None] = get_movie(movie_id=movie_id, cache_days=cache_days)
     if not info:
         utils.notify("Could not get movie information")
         return {}
@@ -1130,7 +1138,19 @@ def get_actor_credits(actor_id, media_type):
     return handle_movies(response["cast"])
 
 
-def get_movie(movie_id, light=False, cache_days=30):
+def get_movie(movie_id, light=False, cache_days=30) -> Union[dict, None]:
+    """gets details from tmdb for a moview with tmdb movie-id
+
+    Args:
+        movie_id (str): tmdb movie id
+        light (bool, optional): return limited info. Defaults to False.
+        cache_days (int, optional):days to use cache vice new query. 
+                                    Defaults to 30.
+
+    Returns:
+        Union[dict, None]: A dict of movie infos.  If no response from TMDB
+                            returns None
+    """
     params = {"include_image_language": "en,null,%s" % addon.setting("LanguageID"),
               "language": addon.setting("LanguageID"),
               "append_to_response": None if light else ALL_MOVIE_PROPS

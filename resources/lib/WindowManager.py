@@ -41,7 +41,7 @@ else:
     ACTOR_XML = ACTOR_XML_CLASSIC
 
 
-class WindowManager(object):
+class WindowManager:
     window_stack = []
 
     def __init__(self):
@@ -53,7 +53,7 @@ class WindowManager(object):
 
     def open_movie_info(self, movie_id=None, dbid=None, name=None, imdb_id=None):
         """
-        open movie info, deal with window stack
+        opens movie info dialog, deal with window stack
         """
         busy.show_busy()
         from .dialogs.DialogMovieInfo import DialogMovieInfo

@@ -4,6 +4,7 @@
 # This program is Free Software see LICENSE file for details
 
 import threading
+from typing import Optional, Union
 
 import xbmc
 import xbmcgui
@@ -68,7 +69,7 @@ class DialogMovieInfo(DialogVideoInfo):
 
     def __init__(self, *args, **kwargs):
         super(DialogMovieInfo, self).__init__(*args, **kwargs)
-        data = tmdb.extended_movie_info(movie_id=kwargs.get('id'),
+        data: Optional[dict] = tmdb.extended_movie_info(movie_id=kwargs.get('id'),
                                         dbid=kwargs.get('dbid'))
         if not data:
             return None
